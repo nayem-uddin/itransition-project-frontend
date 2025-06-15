@@ -1,7 +1,7 @@
 export default function SearchBar() {
   return (
     <>
-      <form className="d-flex m-auto me-0" role="search">
+      <form className="d-flex m-auto me-0 mt-2" role="search">
         <input
           className="form-control"
           type="search"

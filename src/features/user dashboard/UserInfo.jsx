@@ -1,24 +1,16 @@
 export default function UserInfo() {
+  const fields = ["ID", "Full name", "Username", "Email ID"];
+  const props = ["id", "fullName", "username", "email"];
   return (
     <>
-      <table className="table">
+      <table className="table table-bordered">
         <tbody>
-          <tr>
-            <th scope="row">ID</th>
-            <td>{sessionStorage.getItem("id")}</td>
-          </tr>
-          <tr>
-            <th scope="row">Full name</th>
-            <td>{sessionStorage.getItem("fullName")}</td>
-          </tr>
-          <tr>
-            <th scope="row">Username</th>
-            <td>{sessionStorage.getItem("username")}</td>
-          </tr>
-          <tr>
-            <th scope="row">Email ID</th>
-            <td>{sessionStorage.getItem("email")}</td>
-          </tr>
+          {fields.map((field, index) => (
+            <tr key={index}>
+              <th scope="row">{field}</th>
+              <td>{sessionStorage.getItem(props[index])}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </>

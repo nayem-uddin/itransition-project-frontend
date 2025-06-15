@@ -4,41 +4,48 @@ import Logout from "./Logout";
 export default function NavLinks() {
   return (
     <>
-      <nav className="navbar-nav me-0 m-auto">
-        <div>
+      <ul className="navbar-nav me-0 m-auto">
+        <>
           {sessionStorage.getItem("id") ? (
-            <>
-              <Link
-                to={
-                  sessionStorage.getItem("isAdmin")
-                    ? "/admin-dashboard"
-                    : "/user-dashboard"
-                }
-                className="text-white text-decoration-none me-2"
-              >
-                Dashboard
-              </Link>
-              <Logout />
-            </>
+            <div className="d-flex mt-2 mt-lg-0 align-items-center">
+              <li>
+                <Link
+                  to={
+                    sessionStorage.getItem("isAdmin")
+                      ? "/admin-dashboard"
+                      : "/user-dashboard"
+                  }
+                  className="text-white text-decoration-none me-lg-2"
+                >
+                  Dashboard
+                </Link>
+              </li>
+              <li>
+                <Logout />
+              </li>
+            </div>
           ) : (
             <>
-              <Link
-                to="/admin-portal"
-                className="nav-item me-2 text-white text-decoration-none"
-              >
-                Admin portal
-              </Link>
-
-              <Link
-                to="/user-portal"
-                className="nav-item ms-2 text-white text-decoration-none"
-              >
-                User portal
-              </Link>
+              <li>
+                <Link
+                  to="/admin-portal"
+                  className="nav-item me-lg-2 text-white text-decoration-none"
+                >
+                  Admin portal
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/user-portal"
+                  className="nav-item ms-lg-2 text-white text-decoration-none"
+                >
+                  User portal
+                </Link>
+              </li>
             </>
           )}
-        </div>
-      </nav>
+        </>
+      </ul>
     </>
   );
 }

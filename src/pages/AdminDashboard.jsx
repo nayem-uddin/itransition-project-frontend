@@ -1,23 +1,24 @@
+import ManageAccess from "../features/admin access management/ManageAccess";
 import UserInfo from "../features/user dashboard/UserInfo";
 
 export default function AdminDashboard() {
   return (
     <div>
-      <div className="d-flex mt-3">
+      <div className="d-block d-md-flex mt-3">
         <ul
-          className="nav flex-column nav-pills nav-fill mb-3"
-          id="pills-tab"
+          className="nav flex-column nav-pills nav-justified h-25"
+          id="v-pills-tab"
           role="tablist"
         >
           <li className="nav-item" role="presentation">
             <button
               className="nav-link nav-item active"
-              id="pills-info-tab"
+              id="v-pills-info-tab"
               data-bs-toggle="pill"
-              data-bs-target="#pills-info"
+              data-bs-target="#v-pills-info"
               type="button"
               role="tab"
-              aria-controls="pills-info"
+              aria-controls="v-pills-info"
               aria-selected="true"
             >
               Personal information
@@ -27,12 +28,12 @@ export default function AdminDashboard() {
           <li className="nav-item" role="presentation">
             <button
               className="nav-link"
-              id="pills-templates-tab"
+              id="v-pills-templates-tab"
               data-bs-toggle="pill"
-              data-bs-target="#pills-templates"
+              data-bs-target="#v-pills-templates"
               type="button"
               role="tab"
-              aria-controls="pills-templates"
+              aria-controls="v-pills-templates"
               aria-selected="false"
             >
               Manage templates
@@ -41,12 +42,12 @@ export default function AdminDashboard() {
           <li className="nav-item" role="presentation">
             <button
               className="nav-link"
-              id="pills-responses-tab"
+              id="v-pills-responses-tab"
               data-bs-toggle="pill"
-              data-bs-target="#pills-responses"
+              data-bs-target="#v-pills-responses"
               type="button"
               role="tab"
-              aria-controls="pills-responses"
+              aria-controls="v-pills-responses"
               aria-selected="false"
             >
               Manage responses
@@ -55,54 +56,54 @@ export default function AdminDashboard() {
           <li className="nav-item" role="presentation">
             <button
               className="nav-link"
-              id="pills-manage-access-tab"
+              id="v-pills-manage-access-tab"
               data-bs-toggle="pill"
-              data-bs-target="#pills-manage-access"
+              data-bs-target="#v-pills-manage-access"
               type="button"
               role="tab"
-              aria-controls="pills-manage-access"
+              aria-controls="v-pills-manage-access"
               aria-selected="false"
             >
-              Responses sent
+              Manage admin access
             </button>
           </li>
         </ul>
-        <div className="tab-content w-50 m-auto" id="pills-tabContent">
+        <div className="tab-content m-md-auto w-50" id="v-pills-tabContent">
           <div
             className="tab-pane fade show active"
-            id="pills-info"
+            id="v-pills-info"
             role="tabpanel"
-            aria-labelledby="pills-info-tab"
+            aria-labelledby="v-pills-info-tab"
             tabIndex="0"
           >
             <UserInfo />
           </div>
           <div
             className="tab-pane fade"
-            id="pills-responses"
+            id="v-pills-responses"
             role="tabpanel"
-            aria-labelledby="pills-responses-tab"
+            aria-labelledby="v-pills-responses-tab"
             tabIndex="0"
           >
-            responses from other users
+            responses from users
           </div>
           <div
             className="tab-pane fade"
-            id="pills-templates"
+            id="v-pills-templates"
             role="tabpanel"
-            aria-labelledby="pills-templates-tab"
+            aria-labelledby="v-pills-templates-tab"
             tabIndex="0"
           >
-            templates by user
+            templates by users
           </div>
           <div
             className="tab-pane fade"
-            id="pills-manage-access"
+            id="v-pills-manage-access"
             role="tabpanel"
-            aria-labelledby="pills-manage-access-tab"
+            aria-labelledby="v-pills-manage-access-tab"
             tabIndex="0"
           >
-            Manage admin access
+            <ManageAccess />
           </div>
         </div>
       </div>

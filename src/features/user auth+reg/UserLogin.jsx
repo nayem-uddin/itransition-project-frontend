@@ -5,7 +5,6 @@ import TextOrEmail from "../../components/form components/TextOrEmail";
 import DisplayError from "../../components/form components/DisplayError";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../../assets/API URL";
-
 export default function UserLogin() {
   const navigate = useNavigate();
   const {
