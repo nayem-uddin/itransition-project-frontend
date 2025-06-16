@@ -4,7 +4,7 @@ import SubmitButton from "../../components/form components/SubmitButton";
 import Password from "../../components/form components/Password";
 import DisplayError from "../../components/form components/DisplayError";
 import { useNavigate } from "react-router-dom";
-import { API_URL } from "../../assets/API URL";
+import { API_URL, delayInms } from "../../assets/universals";
 export default function UserSignup() {
   const navigate = useNavigate();
   const {
@@ -24,7 +24,7 @@ export default function UserSignup() {
     const data = await res.json();
     if (!res.ok) {
       setError("root.serverError", { type: res.status, message: data.message });
-      setTimeout(() => setError("root.serverError", null), 3000);
+      setTimeout(() => setError("root.serverError", null), delayInms);
       return;
     }
     ["id", "fullName", "username", "email"].map((prop) =>

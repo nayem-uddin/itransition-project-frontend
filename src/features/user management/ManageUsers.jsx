@@ -1,44 +1,47 @@
 import { useEffect, useState } from "react";
 import { API_URL, delayInms } from "../../assets/universals";
 import { useNavigate } from "react-router-dom";
-import AdminInfo from "./AdminInfo";
+import CandidateInfo from "./CandidateInfo";
 import { useDispatch, useSelector } from "react-redux";
-import { deselectAll, selectAll } from "./manageSlice";
-import Actions from "../../components/topbars/admin top bar/admin access/Actions";
+
 import LoadingAnim from "../../components/LoadingAnim";
-import { getAllAdmins } from "./handleAdminsAPI";
-export default function ManageAccess() {
+import { deselectAllUsers, selectAllUsers } from "./controlSlice";
+import ActionsBar from "../../components/topbars/admin top bar/user management/ActionsBar";
+import { getAllAdmins } from "../admin access management/handleAdminsAPI";
+import { getUsers } from "./handleUsersAPI";
+export default function ManageUsers() {
   const dispatch = useDispatch();
-  const { selectedAdmins, isLoading, allAdmins } = useSelector(
-    (state) => state.adminAccessReducer
-  );
-  const { isAdminsListUpdated } = useSelector(
-    (state) => state.userManagementReducer
-  );
-  const feedback = useSelector((state) => state.adminAccessReducer.message);
+  const { allAdmins } = useSelector((state) => state.adminAccessReducer);
+  const { selectedUsers, isLoading, isAdminsListUpdated, allUsers } =
+    useSelector((state) => state.userManagementReducer);
+  const feedback = useSelector((state) => state.userManagementReducer.message);
   const columns = ["ID", "Full name", "Username", "Email", "Status"];
-  const [adminsList, setAdminsList] = useState([]);
+  const [usersList, setUsersList] = useState([]);
   const [message, setmessage] = useState({ ...feedback });
   const navigate = useNavigate();
-  const isAllSelected = adminsList.length === selectedAdmins.length;
+  const isAllSelected = usersList.length === selectedUsers.length;
   useEffect(() => {
     setmessage({ ...feedback });
     setTimeout(() => setmessage({ text: "", type: null }), delayInms);
-  }, [feedback]);
+  }, [feedback.text]);
   useEffect(() => {
     dispatch(getAllAdmins());
+    dispatch(getUsers());
   }, [dispatch, isAdminsListUpdated]);
   useEffect(() => {
-    function admins() {
-      if (allAdmins.length === 0) return;
+    function users() {
+      if (!allAdmins.length || !allUsers.length) return;
       const currentAdminIndex = allAdmins.findIndex(
-        (admin) => admin.id == sessionStorage.getItem("id")
+        (user) => user.id == sessionStorage.getItem("id")
       );
       if (
         currentAdminIndex === -1 ||
         allAdmins[currentAdminIndex].status === "blocked"
       ) {
-        setmessage({ text: "You have no more admin access", type: "error" });
+        setmessage({
+          text: "You have no more admin access",
+          type: "error",
+        });
         setTimeout(() => {
           setmessage({ text: "", type: null });
           sessionStorage.clear();
@@ -47,16 +50,16 @@ export default function ManageAccess() {
         }, delayInms);
         return;
       }
-      setAdminsList([...allAdmins]);
+      setUsersList([...allUsers]);
     }
-    admins();
-  }, [allAdmins]);
+    users();
+  }, [allUsers, allAdmins]);
   return (
-    <div>
+    <>
+      <ActionsBar message={message} setMessage={setmessage} />
       {isLoading && <LoadingAnim />}
-      {!isLoading && adminsList && (
+      {!isLoading && usersList && (
         <>
-          <Actions message={message} setMessage={setmessage} />
           <table className="table">
             <thead>
               <tr>
@@ -66,7 +69,9 @@ export default function ManageAccess() {
                     name="select-all"
                     onChange={(event) =>
                       dispatch(
-                        event.target.checked ? selectAll() : deselectAll()
+                        event.target.checked
+                          ? selectAllUsers()
+                          : deselectAllUsers()
                       )
                     }
                     checked={isAllSelected}
@@ -80,13 +85,13 @@ export default function ManageAccess() {
               </tr>
             </thead>
             <tbody>
-              {adminsList.map((admin) => (
-                <AdminInfo adminInfo={admin} key={admin.id} />
+              {usersList.map((user) => (
+                <CandidateInfo candidate={user} key={user.id} />
               ))}
             </tbody>
           </table>
         </>
       )}
-    </div>
+    </>
   );
 }

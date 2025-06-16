@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { API_URL } from "../../assets/API URL";
+import { API_URL } from "../../assets/universals";
 
 export const blockUnblockAdmins = createAsyncThunk(
   "manageAccess/updateStatus",
@@ -44,5 +44,14 @@ export const deleteAdmins = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error.message ?? "Internal server error");
     }
+  }
+);
+
+export const getAllAdmins = createAsyncThunk(
+  "manageAccess/getAllAdmins",
+  async () => {
+    const res = await fetch(`${API_URL}/admins`);
+    const data = await res.json();
+    return data.adminsList;
   }
 );

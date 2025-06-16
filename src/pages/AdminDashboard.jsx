@@ -1,5 +1,6 @@
 import ManageAccess from "../features/admin access management/ManageAccess";
 import UserInfo from "../features/user dashboard/UserInfo";
+import ManageUsers from "../features/user management/ManageUsers";
 
 export default function AdminDashboard() {
   return (
@@ -39,6 +40,7 @@ export default function AdminDashboard() {
               Manage templates
             </button>
           </li>
+
           <li className="nav-item" role="presentation">
             <button
               className="nav-link"
@@ -53,6 +55,7 @@ export default function AdminDashboard() {
               Manage responses
             </button>
           </li>
+
           <li className="nav-item" role="presentation">
             <button
               className="nav-link"
@@ -67,7 +70,23 @@ export default function AdminDashboard() {
               Manage admin access
             </button>
           </li>
+
+          <li className="nav-item" role="presentation">
+            <button
+              className="nav-link"
+              id="v-pills-manage-users-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#v-pills-manage-users"
+              type="button"
+              role="tab"
+              aria-controls="v-pills-manage-users"
+              aria-selected="false"
+            >
+              Manage users
+            </button>
+          </li>
         </ul>
+
         <div className="tab-content m-md-auto w-50" id="v-pills-tabContent">
           <div
             className="tab-pane fade show active"
@@ -104,6 +123,15 @@ export default function AdminDashboard() {
             tabIndex="0"
           >
             <ManageAccess />
+          </div>
+          <div
+            className="tab-pane fade"
+            id="v-pills-manage-users"
+            role="tabpanel"
+            aria-labelledby="v-pills-manage-users-tab"
+            tabIndex="0"
+          >
+            <ManageUsers />
           </div>
         </div>
       </div>

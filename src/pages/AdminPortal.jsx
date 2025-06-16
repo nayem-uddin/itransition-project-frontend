@@ -4,7 +4,7 @@ import TextOrEmail from "../components/form components/TextOrEmail";
 import SubmitButton from "../components/form components/SubmitButton";
 import { useNavigate } from "react-router-dom";
 import DisplayError from "../components/form components/DisplayError";
-import { API_URL } from "../assets/API URL";
+import { API_URL, delayInms } from "../assets/universals";
 
 export default function AdminPortal() {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ export default function AdminPortal() {
     const data = await res.json();
     if (!res.ok) {
       setError("root.serverError", { type: res.status, message: data.message });
-      setTimeout(() => setError("root.serverError", null), 3000);
+      setTimeout(() => setError("root.serverError", null), delayInms);
       return;
     }
     sessionStorage.setItem("isAdmin", true);

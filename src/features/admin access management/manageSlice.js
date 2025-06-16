@@ -1,12 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { blockUnblockAdmins, deleteAdmins } from "./handleAPI";
+import {
+  blockUnblockAdmins,
+  deleteAdmins,
+  getAllAdmins,
+} from "./handleAdminsAPI";
 
 const manageSlice = createSlice({
   name: "manageAccess",
   initialState: {
     isLoading: false,
+    allAdmins: [],
     selectedAdmins: [],
-    message: "",
+    message: { text: "", type: null },
   },
   reducers: {
     selectAdmin: (state, action) => {
@@ -14,12 +19,12 @@ const manageSlice = createSlice({
     },
     deselectAdmin: (state, action) => {
       const adminIndex = state.selectedAdmins.findIndex(
-        (admin) => admin.email === action.payload.email
+        (admin) => admin.id === action.payload.id
       );
       state.selectedAdmins.splice(adminIndex, 1);
     },
     selectAll: (state) => {
-      state.selectedAdmins = JSON.parse(sessionStorage.getItem("adminsList"));
+      state.selectedAdmins = [...state.allAdmins];
     },
     deselectAll: (state) => {
       state.selectedAdmins = [];
@@ -28,50 +33,61 @@ const manageSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(blockUnblockAdmins.pending, (state) => {
       state.isLoading = true;
-      state.message = "";
+      state.message = { text: "", type: null };
     });
     builder.addCase(blockUnblockAdmins.fulfilled, (state, action) => {
       state.isLoading = false;
       const { message, status } = action.payload;
-      const oldAdminsList = [
-        ...JSON.parse(sessionStorage.getItem("adminsList")),
-      ];
-      const selectionListIds = state.selectedAdmins.map((admin) => admin.id);
-      sessionStorage.setItem(
-        "adminsList",
-        JSON.stringify(
-          oldAdminsList.map((admin) =>
-            selectionListIds.includes(admin.id)
-              ? { ...admin, status }
-              : { ...admin }
-          )
-        )
+      const selectedIds = state.selectedAdmins.map((admin) => admin.id);
+      state.allAdmins = state.allAdmins.map((admin) =>
+        selectedIds.includes(admin.id) ? { ...admin, status } : { ...admin }
       );
       state.selectedAdmins = [];
-      state.message = message;
+      state.message = { text: message, type: "confirmation" };
     });
     builder.addCase(blockUnblockAdmins.rejected, (state, action) => {
       state.isLoading = false;
-      state.message = action?.payload?.message ?? action?.error?.message;
+      state.message = {
+        text: action.payload ?? action?.error?.message,
+        type: "error",
+      };
     });
     builder.addCase(deleteAdmins.pending, (state) => {
       state.isLoading = true;
-      state.message = "";
+      state.message = { text: "", type: null };
     });
     builder.addCase(deleteAdmins.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.message = action.payload.message;
-      const oldAdminsList = JSON.parse(sessionStorage.getItem("adminsList"));
-      const selectedIDs = state.selectedAdmins.map((admin) => admin.id);
-      const newAdminsList = oldAdminsList.filter(
-        (admin) => !selectedIDs.includes(admin.id)
+      state.message = { text: action.payload.message, type: "confirmation" };
+      const selectedIds = state.selectedAdmins.map((admin) => admin.id);
+      state.allAdmins = state.allAdmins.filter(
+        (admin) => !selectedIds.includes(admin.id)
       );
-      sessionStorage.setItem("adminsList", JSON.stringify(newAdminsList));
       state.selectedAdmins = [];
     });
     builder.addCase(deleteAdmins.rejected, (state, action) => {
       state.isLoading = false;
-      state.message = action?.payload?.message ?? action?.error?.message;
+      state.message = {
+        text: action.payload ?? action?.error?.message,
+        type: "error",
+      };
+    });
+    builder.addCase(getAllAdmins.pending, (state) => {
+      state.isLoading = true;
+      state.message = { text: "", type: null };
+    });
+    builder.addCase(getAllAdmins.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.allAdmins = action.payload;
+    });
+    builder.addCase(getAllAdmins.rejected, (state, action) => {
+      state.isLoading = false;
+      state.message = {
+        text:
+          action?.payload?.message ??
+          action?.error?.message ??
+          "Error fetching data",
+      };
     });
   },
 });
