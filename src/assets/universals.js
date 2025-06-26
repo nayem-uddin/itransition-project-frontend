@@ -3,8 +3,8 @@ import { io } from "socket.io-client";
 // const url = "http://localhost";
 const url = "https://itransition-project-backend.onrender.com";
 
-export const API_URL = `${url}:5000`;
-export const socket = io(`${url}:5000`, {
+export const API_URL = `${url}`;
+export const socket = io(`${url}`, {
   withCredentials: true,
 });
 
