@@ -4,7 +4,7 @@ import Password from "../../components/form components/Password";
 import TextOrEmail from "../../components/form components/TextOrEmail";
 import DisplayError from "../../components/form components/DisplayError";
 import { useNavigate } from "react-router-dom";
-import { API_URL, delayInms } from "../../assets/universals";
+import { API_URL, delayInms, socket } from "../../assets/universals";
 export default function UserLogin() {
   const navigate = useNavigate();
   const {
@@ -28,6 +28,7 @@ export default function UserLogin() {
       setTimeout(() => setError("root.serverError", null), delayInms);
       return;
     }
+    socket.emit("user-entry", data.userInfo.id);
     ["id", "fullName", "username", "email"].map((prop) =>
       sessionStorage.setItem(prop, data.userInfo[prop])
     );

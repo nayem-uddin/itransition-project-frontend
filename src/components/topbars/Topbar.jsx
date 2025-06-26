@@ -22,7 +22,9 @@ export default function Topbar() {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            {location.pathname === "/" && <SearchBar />}
+            {!["/user-portal", "/admin-portal"].includes(location.pathname) && (
+              <SearchBar />
+            )}
             <NavLinks />
           </div>
         </div>

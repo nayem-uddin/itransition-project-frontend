@@ -6,6 +6,8 @@ import UserDashboard from "./pages/UserDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import Topbar from "./components/topbars/Topbar";
 import AdminPortal from "./pages/AdminPortal";
+import ViewFullTemplate from "./components/gallery/ViewFullTemplate";
+import EditTemplate from "./components/template showcase/EditTemplate";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         <Route path="/user-dashboard" element={<UserDashboard />} />
         <Route path="/admin-portal" element={<AdminPortal />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        <Route path="/view-template" element={<ViewFullTemplate />} />
+        <Route path="/edit-template" element={<EditTemplate />} />
       </Routes>
     </BrowserRouter>
   );

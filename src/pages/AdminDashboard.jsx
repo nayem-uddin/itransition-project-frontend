@@ -1,11 +1,12 @@
 import ManageAccess from "../features/admin access management/ManageAccess";
+import AdminsTemplateShowcase from "../features/admin-managed templates and forms/AdminsTemplateShowcase";
 import UserInfo from "../features/user dashboard/UserInfo";
 import ManageUsers from "../features/user management/ManageUsers";
 
 export default function AdminDashboard() {
   return (
     <div>
-      <div className="d-block d-md-flex mt-3">
+      <div className="d-block d-lg-flex mt-3">
         <ul
           className="nav flex-column nav-pills nav-justified h-25"
           id="v-pills-tab"
@@ -113,7 +114,7 @@ export default function AdminDashboard() {
             aria-labelledby="v-pills-templates-tab"
             tabIndex="0"
           >
-            templates by users
+            <AdminsTemplateShowcase />
           </div>
           <div
             className="tab-pane fade"

@@ -11,6 +11,7 @@ export const addToAdmins = createAsyncThunk(
           "Content-type": "application/json",
         },
         body: JSON.stringify(selectedUsers),
+        credentials: "include",
       });
       const data = await res.json();
       if (!res.ok) {
@@ -26,7 +27,7 @@ export const addToAdmins = createAsyncThunk(
 export const getUsers = createAsyncThunk(
   "userManagement/getUsers",
   async () => {
-    const res = await fetch(`${API_URL}/users`);
+    const res = await fetch(`${API_URL}/users`, { credentials: "include" });
     const data = await res.json();
     return data;
   }
@@ -44,6 +45,7 @@ export const blockUnblockUsers = createAsyncThunk(
           "Content-type": "application/json",
         },
         body: JSON.stringify({ selectionList, status }),
+        credentials: "include",
       });
       const data = await res.json();
       if (!res.ok) {
@@ -66,6 +68,7 @@ export const deleteUsers = createAsyncThunk(
           "Content-type": "application/json",
         },
         body: JSON.stringify(selectionList),
+        credentials: "include",
       });
       const data = await res.json();
       if (!res.ok) {

@@ -23,7 +23,14 @@ export default function ManageAccess() {
   const isAllSelected = adminsList.length === selectedAdmins.length;
   useEffect(() => {
     setmessage({ ...feedback });
-    setTimeout(() => setmessage({ text: "", type: null }), delayInms);
+    setTimeout(() => {
+      setmessage({ text: "", type: null });
+      if (feedback.type === "error") {
+        sessionStorage.clear();
+        navigate("/");
+        location.reload();
+      }
+    }, delayInms);
   }, [feedback]);
   useEffect(() => {
     dispatch(getAllAdmins());
@@ -31,22 +38,6 @@ export default function ManageAccess() {
   useEffect(() => {
     function admins() {
       if (allAdmins.length === 0) return;
-      const currentAdminIndex = allAdmins.findIndex(
-        (admin) => admin.id == sessionStorage.getItem("id")
-      );
-      if (
-        currentAdminIndex === -1 ||
-        allAdmins[currentAdminIndex].status === "blocked"
-      ) {
-        setmessage({ text: "You have no more admin access", type: "error" });
-        setTimeout(() => {
-          setmessage({ text: "", type: null });
-          sessionStorage.clear();
-          navigate("/");
-          location.reload();
-        }, delayInms);
-        return;
-      }
       setAdminsList([...allAdmins]);
     }
     admins();

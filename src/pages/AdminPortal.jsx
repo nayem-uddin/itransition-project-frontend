@@ -32,6 +32,7 @@ export default function AdminPortal() {
     ["id", "fullName", "username", "email"].map((prop) =>
       sessionStorage.setItem(prop, data.adminInfo[prop])
     );
+    document.cookie = `id=${data.adminInfo.id};path=/`;
     navigate("/", { replace: true });
   }
   return (

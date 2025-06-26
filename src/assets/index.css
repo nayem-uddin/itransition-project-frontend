@@ -4,6 +4,13 @@
   box-sizing: border-box;
   max-width: 100%;
 }
+
+.input:focus {
+  outline: none;
+}
+.nav-tabs .nav-link.active {
+  outline: 1px solid rgb(172, 164, 164);
+}
 @media screen and (max-width: 500px) {
   .table {
     font-size: small;
