@@ -1,7 +1,7 @@
 import { io } from "socket.io-client";
 
-const url = "http://localhost:5000";
-// const url = "https://itransition-project-backend.onrender.com";
+// const url = "http://localhost:5000";
+const url = "https://itransition-project-backend.onrender.com";
 
 export const API_URL = `${url}`;
 export const socket = io(`${url}`, {
