@@ -4,7 +4,7 @@ import TextOrEmail from "../components/form components/TextOrEmail";
 import SubmitButton from "../components/form components/SubmitButton";
 import { useNavigate } from "react-router-dom";
 import DisplayError from "../components/form components/DisplayError";
-import { API_URL, delayInms } from "../assets/universals";
+import { API_URL, delayInms, waitRequest } from "../assets/universals";
 
 export default function AdminPortal() {
   const navigate = useNavigate();
@@ -15,6 +15,10 @@ export default function AdminPortal() {
     formState: { errors },
   } = useForm();
   async function onSubmit(credentials) {
+    setError("root.serverError", {
+      type: waitRequest.type,
+      message: waitRequest.text,
+    });
     const res = await fetch(`${API_URL}/admin-login`, {
       method: "POST",
       headers: {

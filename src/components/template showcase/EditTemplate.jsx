@@ -4,7 +4,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { updateWholeTemplate } from "../../features/template creation/templateSlice";
 import GeneralSettings from "../template components/template details/GeneralSettings";
 import QuestionSet from "../../features/template creation/QuestionSet";
-import { API_URL, initialMessage, socket } from "../../assets/universals";
+import {
+  API_URL,
+  initialMessage,
+  socket,
+  waitRequest,
+} from "../../assets/universals";
 export default function EditTemplate() {
   const location = useLocation();
   const template = location.state;
@@ -21,6 +26,7 @@ export default function EditTemplate() {
     dispatch(updateWholeTemplate(template));
   }, [template]);
   async function handleClick(e) {
+    setMessage(waitRequest);
     const res = await fetch(`${API_URL}/templates`, {
       method: "PUT",
       headers: {

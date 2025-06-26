@@ -4,7 +4,7 @@ import SubmitButton from "../../components/form components/SubmitButton";
 import Password from "../../components/form components/Password";
 import DisplayError from "../../components/form components/DisplayError";
 import { useNavigate } from "react-router-dom";
-import { API_URL, delayInms } from "../../assets/universals";
+import { API_URL, delayInms, waitRequest } from "../../assets/universals";
 export default function UserSignup() {
   const navigate = useNavigate();
   const {
@@ -14,6 +14,10 @@ export default function UserSignup() {
     formState: { errors },
   } = useForm();
   async function onSubmit(userData) {
+    setError("root.serverError", {
+      type: waitRequest.type,
+      message: waitRequest.text,
+    });
     const res = await fetch(`${API_URL}/signup`, {
       method: "POST",
       headers: {

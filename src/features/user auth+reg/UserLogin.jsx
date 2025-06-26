@@ -4,7 +4,12 @@ import Password from "../../components/form components/Password";
 import TextOrEmail from "../../components/form components/TextOrEmail";
 import DisplayError from "../../components/form components/DisplayError";
 import { useNavigate } from "react-router-dom";
-import { API_URL, delayInms, socket } from "../../assets/universals";
+import {
+  API_URL,
+  delayInms,
+  socket,
+  waitRequest,
+} from "../../assets/universals";
 export default function UserLogin() {
   const navigate = useNavigate();
   const {
@@ -15,6 +20,10 @@ export default function UserLogin() {
   } = useForm();
 
   async function onSubmit(credentials) {
+    setError("root.serverError", {
+      type: waitRequest.type,
+      message: waitRequest.text,
+    });
     const res = await fetch(`${API_URL}/login`, {
       method: "POST",
       headers: {

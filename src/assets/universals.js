@@ -10,6 +10,7 @@ export const socket = io(`${url}`, {
 
 export const delayInms = 3000;
 export const initialMessage = { text: "", type: null };
+export const waitRequest = { text: "Please wait", type: "request" };
 socket.on("connect_error", (err) => {
   console.log(err);
 });

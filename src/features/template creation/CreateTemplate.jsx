@@ -3,7 +3,12 @@ import QuestionSet from "./QuestionSet";
 import GeneralSettings from "../../components/template components/template details/GeneralSettings";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { API_URL, initialMessage, socket } from "../../assets/universals";
+import {
+  API_URL,
+  initialMessage,
+  socket,
+  waitRequest,
+} from "../../assets/universals";
 import { useNavigate } from "react-router-dom";
 
 export default function CreateTemplate() {
@@ -15,6 +20,7 @@ export default function CreateTemplate() {
     setTimeout(() => setmessage(initialMessage), 2000);
   }
   async function handleClick(e) {
+    setmessage(waitRequest);
     const res = await fetch(`${API_URL}/templates`, {
       method: "POST",
       headers: {
