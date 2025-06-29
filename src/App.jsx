@@ -8,6 +8,7 @@ import Topbar from "./components/topbars/Topbar";
 import AdminPortal from "./pages/AdminPortal";
 import ViewFullTemplate from "./components/gallery/ViewFullTemplate";
 import EditTemplate from "./components/template showcase/EditTemplate";
+import Form from "./components/template showcase/Form";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/view-template" element={<ViewFullTemplate />} />
         <Route path="/edit-template" element={<EditTemplate />} />
+        <Route path="/form" element={<Form />} />
       </Routes>
     </BrowserRouter>
   );

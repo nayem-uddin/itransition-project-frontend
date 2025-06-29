@@ -1,24 +1,21 @@
-import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import QuestionSet from "./QuestionSet";
 import GeneralSettings from "../../components/template components/template details/GeneralSettings";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   API_URL,
   initialMessage,
-  socket,
+  notifyUpdate,
   waitRequest,
+  updateMessage,
 } from "../../assets/universals";
 import { useNavigate } from "react-router-dom";
+import DisplayMessage from "../../components/DisplayMessage";
 
 export default function CreateTemplate() {
   const template = useSelector((state) => state.templateReducer);
   const [message, setmessage] = useState(initialMessage);
   const navigate = useNavigate();
-  function updateMessage(data) {
-    setmessage(data);
-    setTimeout(() => setmessage(initialMessage), 2000);
-  }
   async function handleClick(e) {
     setmessage(waitRequest);
     const res = await fetch(`${API_URL}/templates`, {
@@ -33,27 +30,18 @@ export default function CreateTemplate() {
     });
     const data = await res.json();
     if (res.ok) {
-      socket.emit("request-templates");
-      socket.emit("request-created-templates", sessionStorage.getItem("id"));
+      notifyUpdate();
     } else if ([403, 404].includes(res.status)) {
       navigate("/");
       sessionStorage.clear();
       location.reload();
     }
-    updateMessage(data);
+    updateMessage(setmessage, data);
   }
   return (
     <div>
       <div className="d-flex justify-content-end">
-        {message.text && (
-          <div
-            className={`m-auto ${
-              message.type === "confirmation" ? "text-success" : "text-danger"
-            }`}
-          >
-            {message.text}
-          </div>
-        )}
+        {message.text && <DisplayMessage message={message} />}
         <input
           type="button"
           value="Save"

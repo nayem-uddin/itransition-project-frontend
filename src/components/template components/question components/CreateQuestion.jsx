@@ -29,7 +29,7 @@ export default function CreateQuestion({ question, index }) {
     }
   }
   return (
-    <div className="mb-3 border border-dark p-3">
+    <div className="mb-3 border border-dark-subtle p-3">
       <Title question={question} handleChange={handleChange} />
       <Description question={question} handleChange={handleChange} />
       <label htmlFor="type" id="type">
@@ -48,7 +48,9 @@ export default function CreateQuestion({ question, index }) {
           </MenuItem>
         ))}
       </Select>
-      {question.type === "integer" && <IntType index={index} />}
+      {question.type === "integer" && (
+        <IntType index={index} question={question} />
+      )}
       {["radio", "checkbox"].includes(question.type) && (
         <RadioOrCheckBoxType question={question} index={index} />
       )}

@@ -7,15 +7,15 @@ import QuestionSet from "../../features/template creation/QuestionSet";
 import {
   API_URL,
   initialMessage,
-  socket,
   waitRequest,
+  notifyUpdate,
 } from "../../assets/universals";
+import Responses from "./Responses";
 export default function EditTemplate() {
   const location = useLocation();
   const template = location.state;
   const dispatch = useDispatch();
   const updatedTemplate = useSelector((state) => state.templateReducer);
-  // const { title, description, Questions } = template;
   const [message, setMessage] = useState(initialMessage);
   const navigate = useNavigate();
   function updateMessage(data) {
@@ -36,14 +36,17 @@ export default function EditTemplate() {
     });
     const data = await res.json();
     if (res.ok) {
-      socket.emit("request-templates");
-      socket.emit("request-created-templates", sessionStorage.getItem("id"));
+      notifyUpdate();
+    } else if ([403, 404].includes(res.status)) {
+      navigate("/");
+      sessionStorage.clear();
+      location.reload();
     }
     updateMessage(data);
   }
   return (
     <div className="d-flex flex-column">
-      <div className="m-auto">
+      <div className="m-auto" style={{ minWidth: "300px" }}>
         <div className="d-flex justify-content-end">
           {message.text && (
             <div
@@ -87,6 +90,18 @@ export default function EditTemplate() {
           >
             Questions
           </button>
+          <button
+            className="nav-link"
+            id="results-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#results-tab-pane"
+            type="button"
+            role="tab"
+            aria-controls="results-tab-pane"
+            aria-selected="false"
+          >
+            Results
+          </button>
         </nav>
         <div className="tab-content" id="myTabContent">
           <div
@@ -106,6 +121,15 @@ export default function EditTemplate() {
             tabIndex="0"
           >
             <QuestionSet />
+          </div>
+          <div
+            className="tab-pane fade"
+            id="results-tab-pane"
+            role="tabpanel"
+            aria-labelledby="results-tab"
+            tabIndex="0"
+          >
+            <Responses template={template} />
           </div>
         </div>
       </div>

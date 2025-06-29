@@ -1,3 +1,4 @@
+import Allforms from "../components/sent forms showcase/AllForms";
 import CreateTemplate from "../features/template creation/CreateTemplate";
 import UserInfo from "../features/user dashboard/UserInfo";
 import ViewTemplates from "../features/user dashboard/ViewTemplates";
@@ -25,7 +26,6 @@ export default function UserDashboard() {
               Personal information
             </button>
           </li>
-
           <li className="nav-item" role="presentation">
             <button
               className="nav-link"
@@ -38,20 +38,6 @@ export default function UserDashboard() {
               aria-selected="false"
             >
               Created templates
-            </button>
-          </li>
-          <li className="nav-item" role="presentation">
-            <button
-              className="nav-link"
-              id="pills-received-responses-tab"
-              data-bs-toggle="pill"
-              data-bs-target="#pills-received-responses"
-              type="button"
-              role="tab"
-              aria-controls="pills-received-responses"
-              aria-selected="false"
-            >
-              Responses received
             </button>
           </li>
           <li className="nav-item" role="presentation">
@@ -95,15 +81,6 @@ export default function UserDashboard() {
           </div>
           <div
             className="tab-pane fade"
-            id="pills-received-responses"
-            role="tabpanel"
-            aria-labelledby="pills-received-responses-tab"
-            tabIndex="0"
-          >
-            responses from other users
-          </div>
-          <div
-            className="tab-pane fade"
             id="pills-templates"
             role="tabpanel"
             aria-labelledby="pills-templates-tab"
@@ -118,7 +95,7 @@ export default function UserDashboard() {
             aria-labelledby="pills-sent-responses-tab"
             tabIndex="0"
           >
-            responses from user to other forms
+            <Allforms />
           </div>
           <div
             className="tab-pane fade"

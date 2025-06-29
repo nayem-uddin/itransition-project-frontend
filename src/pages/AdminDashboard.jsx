@@ -45,21 +45,6 @@ export default function AdminDashboard() {
           <li className="nav-item" role="presentation">
             <button
               className="nav-link"
-              id="v-pills-responses-tab"
-              data-bs-toggle="pill"
-              data-bs-target="#v-pills-responses"
-              type="button"
-              role="tab"
-              aria-controls="v-pills-responses"
-              aria-selected="false"
-            >
-              Manage responses
-            </button>
-          </li>
-
-          <li className="nav-item" role="presentation">
-            <button
-              className="nav-link"
               id="v-pills-manage-access-tab"
               data-bs-toggle="pill"
               data-bs-target="#v-pills-manage-access"
@@ -98,15 +83,7 @@ export default function AdminDashboard() {
           >
             <UserInfo />
           </div>
-          <div
-            className="tab-pane fade"
-            id="v-pills-responses"
-            role="tabpanel"
-            aria-labelledby="v-pills-responses-tab"
-            tabIndex="0"
-          >
-            responses from users
-          </div>
+
           <div
             className="tab-pane fade"
             id="v-pills-templates"
