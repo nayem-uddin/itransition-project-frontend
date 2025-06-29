@@ -25,6 +25,7 @@ export default function AdminPortal() {
         "Content-type": "application/json",
       },
       body: JSON.stringify(credentials),
+      credentials: "include",
     });
     const data = await res.json();
     if (!res.ok) {
