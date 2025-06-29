@@ -62,9 +62,7 @@ const templateSlice = createSlice({
       }
     },
     giveAccess: (state, action) => {
-      const usersList = state?.usersWithAccess ?? [];
-      usersList.push(...action.payload);
-      state = { ...state, usersWithAccess: usersList };
+      Object.assign(state, { usersWithAccess: action.payload });
     },
     setTags: (state, action) => {
       state.tags = action.payload;

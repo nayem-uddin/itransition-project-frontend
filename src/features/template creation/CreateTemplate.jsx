@@ -17,6 +17,7 @@ export default function CreateTemplate() {
   const [message, setmessage] = useState(initialMessage);
   const navigate = useNavigate();
   async function handleClick(e) {
+    // console.log(template);
     setmessage(waitRequest);
     const res = await fetch(`${API_URL}/templates`, {
       method: "POST",

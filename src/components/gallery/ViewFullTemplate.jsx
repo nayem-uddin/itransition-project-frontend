@@ -23,7 +23,7 @@ export default function ViewFullTemplate() {
   const hasAccess =
     userId &&
     (accessibility === "public" ||
-      template?.usersWithAccess?.map((user) => user.id)?.includes(userId));
+      template?.usersWithAccess?.includes(Number(userId)));
   async function onSubmit(data) {
     const form = toForm(data, template.id, Questions);
     const res = await fetch(`${API_URL}/form`, {
