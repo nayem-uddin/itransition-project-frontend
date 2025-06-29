@@ -38,7 +38,7 @@ export default function Responses({ template }) {
         <tbody>
           {forms.length === 0 && <p>No response received</p>}
           {forms.map((form) => (
-            <tr>
+            <tr key={form.id}>
               <td className="pe-5">Response from {form.User.fullName}</td>
               <td>
                 <Button onClick={() => showForm(form)}>

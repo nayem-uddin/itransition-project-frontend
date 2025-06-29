@@ -28,7 +28,6 @@ export default function Form() {
   }, [answers]);
   async function onSubmit(data) {
     const updatedForm = formatForm(form, data);
-    // console.log(updatedForm);
     const endpoint = sessionStorage.getItem("isAdmin")
       ? "form-manipulate"
       : "form";
