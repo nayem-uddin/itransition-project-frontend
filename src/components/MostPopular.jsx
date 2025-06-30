@@ -14,7 +14,6 @@ export default function MostPopular({ templates }) {
   return (
     <>
       <Gallery templates={populars.slice(0, 5)} />
-      {console.log(populars)}
     </>
   );
 }
