@@ -1,7 +1,13 @@
 import { Send } from "@mui/icons-material";
 import { Button, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { API_URL, socket, updateMessage } from "../../assets/universals";
+import {
+  API_URL,
+  initialMessage,
+  socket,
+  updateMessage,
+  waitRequest,
+} from "../../assets/universals";
 export default function EditComment({ setMessage, comm, setEditMode }) {
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
@@ -16,6 +22,7 @@ export default function EditComment({ setMessage, comm, setEditMode }) {
       UserId: comm.UserId,
       ...data,
     };
+    setMessage(waitRequest);
     const res = await fetch(`${API_URL}/comment`, {
       method: "PUT",
       headers: {
@@ -27,8 +34,8 @@ export default function EditComment({ setMessage, comm, setEditMode }) {
     if (res.ok) {
       socket.emit("update-comments", comm.TemplateId);
       reset();
-
       setEditMode(false);
+      setMessage(initialMessage);
     } else {
       updateMessage(setMessage, message);
     }
