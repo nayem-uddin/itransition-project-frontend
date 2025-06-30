@@ -11,6 +11,8 @@ import {
 } from "../../assets/universals";
 import DisplayMessage from "../DisplayMessage";
 import { useState } from "react";
+import Likes from "./Likes";
+import LikeAndComment from "./LikeAndComment";
 export default function ViewFullTemplate() {
   const { register, handleSubmit } = useForm();
   const [message, setMessage] = useState(initialMessage);
@@ -83,6 +85,7 @@ export default function ViewFullTemplate() {
             </div>
           </fieldset>
         </form>
+        <LikeAndComment templateId={template.id} />
       </div>
     </div>
   );
