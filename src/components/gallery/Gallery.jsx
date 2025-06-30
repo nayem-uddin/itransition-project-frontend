@@ -55,40 +55,38 @@ export default function Gallery({ templates }) {
     );
   }
   return (
-    <div>
-      <div className="d-flex justify-content-center m-auto">
-        <Box>
-          <DataGrid
-            rows={templates}
-            columns={columns}
-            onRowClick={handleClick}
-            sx={{
-              "& .MuiDataGrid-columnHeaders": {
-                fontWeight: "bold",
-                fontSize: "1rem",
-              },
-              "&.MuiDataGrid-root--densityCompact .MuiDataGrid-cell": {
-                py: "8px",
-              },
-              "&.MuiDataGrid-root--densityStandard .MuiDataGrid-cell": {
-                py: "15px",
-              },
-              "&.MuiDataGrid-root--densityComfortable .MuiDataGrid-cell": {
-                py: "22px",
-              },
-              "& .MuiDataGrid-row": {
-                cursor: "pointer",
-              },
-            }}
-            showToolbar
-            slotProps={{
-              toolbar: { showQuickFilter: false },
-            }}
-            slots={{ noRowsOverlay: gridOverlay }}
-            getRowHeight={() => "auto"}
-          />
-        </Box>
-      </div>
+    <div className="d-flex justify-content-center m-auto">
+      <Box>
+        <DataGrid
+          rows={templates}
+          columns={columns}
+          onRowClick={handleClick}
+          sx={{
+            "& .MuiDataGrid-columnHeaders": {
+              fontWeight: "bold",
+              fontSize: "1rem",
+            },
+            "&.MuiDataGrid-root--densityCompact .MuiDataGrid-cell": {
+              py: "8px",
+            },
+            "&.MuiDataGrid-root--densityStandard .MuiDataGrid-cell": {
+              py: "15px",
+            },
+            "&.MuiDataGrid-root--densityComfortable .MuiDataGrid-cell": {
+              py: "22px",
+            },
+            "& .MuiDataGrid-row": {
+              cursor: "pointer",
+            },
+          }}
+          showToolbar
+          slotProps={{
+            toolbar: { showQuickFilter: false },
+          }}
+          slots={{ noRowsOverlay: gridOverlay }}
+          getRowHeight={() => "auto"}
+        />
+      </Box>
     </div>
   );
 }
