@@ -37,10 +37,10 @@ export default function Homepage() {
             <TabPanel value="1">
               <Gallery templates={templates} />
             </TabPanel>
-            <TabPanel value={"2"}>
+            <TabPanel value="2">
               <MostPopular templates={templates} />
             </TabPanel>
-            <TabPanel value={"3"}>
+            <TabPanel value="3">
               <Tagcloud templates={templates} />
             </TabPanel>
           </Box>
