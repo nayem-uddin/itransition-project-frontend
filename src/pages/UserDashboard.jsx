@@ -6,7 +6,7 @@ import ViewTemplates from "../features/user dashboard/ViewTemplates";
 export default function UserDashboard() {
   return (
     <>
-      <div className="d-block d-lg-flex mt-3">
+      <div className="d-flex flex-column flex-md-row mt-3">
         <ul
           className="nav flex-column nav-pills nav-fill mb-3 h-25"
           id="pills-tab"

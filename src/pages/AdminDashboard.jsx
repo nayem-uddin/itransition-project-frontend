@@ -6,7 +6,7 @@ import ManageUsers from "../features/user management/ManageUsers";
 export default function AdminDashboard() {
   return (
     <div>
-      <div className="d-block d-lg-flex mt-3">
+      <div className="d-flex flex-column flex-md-row mt-3">
         <ul
           className="nav flex-column nav-pills nav-justified h-25"
           id="v-pills-tab"

@@ -1,29 +1,36 @@
 import { useState } from "react";
-
-export default function Option({ question, opt, index, handleChange }) {
+import ActionsOnOption from "./ActionsOnOption";
+export default function Option({
+  question,
+  opt,
+  index,
+  handleChange,
+  deleteOption,
+}) {
   const [editMode, setEditMode] = useState(false);
-  function handleClick(e) {
-    setEditMode(true);
-  }
-  function handleBlur(e) {
+  function handleBlur() {
     setEditMode(false);
   }
+  function deleteAction() {
+    deleteOption(index);
+  }
   return (
-    <div>
-      <input type={question.type} name={question.title} value={opt} />
-      {editMode ? (
-        <input
-          type="text"
-          autoFocus
-          value={opt}
-          onChange={(e) => handleChange(e, index)}
-          onBlur={handleBlur}
-        />
-      ) : (
-        <label htmlFor={opt} onClick={handleClick}>
-          {opt}
-        </label>
-      )}
+    <div className="d-flex align-items-center">
+      <div>
+        <input type={question.type} name={question.title} value={opt} />
+        {editMode ? (
+          <input
+            type="text"
+            autoFocus
+            value={opt}
+            onChange={(e) => handleChange(e, index)}
+            onBlur={handleBlur}
+          />
+        ) : (
+          <label htmlFor={opt}>{opt}</label>
+        )}
+      </div>
+      <ActionsOnOption setEditMode={setEditMode} deleteAction={deleteAction} />
     </div>
   );
 }

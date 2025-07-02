@@ -14,6 +14,9 @@ export default function RadioOrCheckBoxType({ question, index }) {
       modifyOptions({ index, options: options.toSpliced(idx, 1, value) })
     );
   }
+  function deleteOption(idx) {
+    dispatch(modifyOptions({ index, options: options.toSpliced(idx, 1) }));
+  }
   return (
     <div>
       {options?.map((opt, index) => (
@@ -23,6 +26,7 @@ export default function RadioOrCheckBoxType({ question, index }) {
           index={index}
           question={question}
           handleChange={handleChange}
+          deleteOption={deleteOption}
         />
       ))}
       <input type="button" value="Add new option" onClick={addNewOption} />

@@ -1,14 +1,19 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { Box, styled, Tooltip } from "@mui/material";
+import { Box, styled, Toolbar, Tooltip } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Markdown from "react-markdown";
 import { useState } from "react";
-import ShowcaseTopBar from "../../components/topbars/showcase top bar/ShowcaseTopbar";
+import { GridToolbar } from "@mui/x-data-grid/internals";
+import DeleteTemplates from "../../components/topbars/showcase top bar/DeleteTemplates";
+import PopupMessage from "../../components/template showcase/PopupMessage";
+import { waitRequest } from "../../assets/universals";
 
 export default function Showcase({ templates }) {
   const navigate = useNavigate();
   const currentPath = location.pathname;
   const [selectedIds, setSelectedIds] = useState([]);
+  const [message, setMessage] = useState(waitRequest);
+  const [open, setOpen] = useState(true);
   function handleClick(params, event, details) {
     const idx = templates.findIndex((template) => template.id === params.id);
     navigate("/edit-template", {
@@ -17,6 +22,20 @@ export default function Showcase({ templates }) {
   }
   function getSelectedRowIds(selectedRows) {
     setSelectedIds(Array.from(selectedRows.ids));
+  }
+  function CustomToolbar() {
+    return (
+      <Toolbar>
+        <GridToolbar />
+        <Tooltip>
+          <DeleteTemplates
+            templateIds={selectedIds}
+            setMessage={setMessage}
+            setOpen={setOpen}
+          />
+        </Tooltip>
+      </Toolbar>
+    );
   }
   function defineColumn(field, headerName, flex) {
     return {
@@ -66,9 +85,8 @@ export default function Showcase({ templates }) {
   }
   return (
     <div>
-      <ShowcaseTopBar templateIds={selectedIds} />
       <div className="d-flex justify-content-center m-auto">
-        <Box>
+        <Box sx={{ minWidth: "300px" }}>
           <DataGrid
             onRowSelectionModelChange={getSelectedRowIds}
             checkboxSelection
@@ -97,11 +115,12 @@ export default function Showcase({ templates }) {
             slotProps={{
               toolbar: { showQuickFilter: false },
             }}
-            slots={{ noRowsOverlay: gridOverlay }}
+            slots={{ noRowsOverlay: gridOverlay, toolbar: CustomToolbar }}
             getRowHeight={() => "auto"}
           />
         </Box>
       </div>
+      <PopupMessage message={message} isOpen={open} setOpen={setOpen} />
     </div>
   );
 }

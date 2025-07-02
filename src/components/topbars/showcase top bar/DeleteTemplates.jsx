@@ -9,8 +9,8 @@ import {
 export default function DeleteTemplates({ templateIds, setMessage, setOpen }) {
   const path = location.pathname;
   async function templatesDelete() {
-    setMessage(waitRequest);
     setOpen(true);
+    setMessage(waitRequest);
     const reqBody = { templateIds };
     let endpoint;
     let credentialsParam;
@@ -32,10 +32,10 @@ export default function DeleteTemplates({ templateIds, setMessage, setOpen }) {
       body: JSON.stringify(reqBody),
     });
     const data = await res.json();
-    updateMessage(setMessage, data);
     if (res.ok) {
       notifyUpdate();
     }
+    updateMessage(setMessage, data);
   }
   return (
     <>
