@@ -37,16 +37,21 @@ export default function QuestionSet() {
     dispatch(removeQuestions());
     if (pathname === "/edit-template") {
       setMessage(waitRequest);
-      const res = await fetch(`${API_URL}/questions`, {
-        method: "DELETE",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          UserId: template.UserId ?? sessionStorage.getItem("id"),
-          selectedQuestions,
-        }),
-      });
+      const isAdmin = sessionStorage.getItem("isAdmin");
+      const res = await fetch(
+        `${API_URL}/${isAdmin ? "questions-manipulate" : "questions"}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-type": "application/json",
+          },
+          credentials: isAdmin ? "include" : "omit",
+          body: JSON.stringify({
+            UserId: template.UserId ?? sessionStorage.getItem("id"),
+            selectedQuestions,
+          }),
+        }
+      );
       const data = await res.json();
       updateMessage(setMessage, data);
       if ([403, 404].includes(res.status)) {
