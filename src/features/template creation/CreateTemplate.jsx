@@ -18,13 +18,15 @@ export default function CreateTemplate() {
   const navigate = useNavigate();
   async function handleClick(e) {
     setmessage(waitRequest);
+    const templateFormatted = { ...template };
+    delete templateFormatted["selectedQuestions"];
     const res = await fetch(`${API_URL}/templates`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        ...template,
+        ...templateFormatted,
         UserId: sessionStorage.getItem("id"),
       }),
     });

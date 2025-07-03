@@ -19,6 +19,7 @@ const templateSlice = createSlice({
     topic: "survey",
     Questions: [question],
     tags: [],
+    selectedQuestions: [],
   },
   reducers: {
     updateWholeTemplate: (state, action) => {
@@ -67,6 +68,20 @@ const templateSlice = createSlice({
     setTags: (state, action) => {
       state.tags = action.payload;
     },
+    selectAQuestion: (state, action) => {
+      state.selectedQuestions.push(JSON.stringify(action.payload));
+    },
+    deselectAQuestion: (state, action) => {
+      state.selectedQuestions = state.selectedQuestions.filter(
+        (q) => JSON.stringify(q) !== JSON.stringify(action.payload)
+      );
+    },
+    removeQuestions: (state) => {
+      state.Questions = state.Questions.filter(
+        (q) => !state.selectedQuestions.includes(JSON.stringify(q))
+      );
+      state.selectedQuestions = [];
+    },
   },
 });
 
@@ -82,4 +97,7 @@ export const {
   reorderQuestions,
   setTemplateProp,
   giveAccess,
+  selectAQuestion,
+  deselectAQuestion,
+  removeQuestions,
 } = templateSlice.actions;

@@ -1,4 +1,3 @@
-import CheckboxTypeResponse from "./CheckboxOrRadioTypeResponse";
 import IntTypeResponse from "./IntTypeResponse";
 import CheckboxOrRadioTypeResponse from "./CheckboxOrRadioTypeResponse";
 import StringTypeResponse from "./StringTypeResponse";

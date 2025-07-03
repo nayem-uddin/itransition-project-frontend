@@ -9,6 +9,7 @@ import {
   initialMessage,
   waitRequest,
   notifyUpdate,
+  updateMessage,
 } from "../../assets/universals";
 import Responses from "./Responses";
 export default function EditTemplate() {
@@ -18,14 +19,10 @@ export default function EditTemplate() {
   const updatedTemplate = useSelector((state) => state.templateReducer);
   const [message, setMessage] = useState(initialMessage);
   const navigate = useNavigate();
-  function updateMessage(data) {
-    setMessage(data);
-    setTimeout(() => setMessage(initialMessage), 2000);
-  }
   useEffect(() => {
     dispatch(updateWholeTemplate(template));
   }, [template]);
-  async function handleClick(e) {
+  async function handleClick() {
     setMessage(waitRequest);
     const res = await fetch(`${API_URL}/templates`, {
       method: "PUT",
@@ -42,7 +39,7 @@ export default function EditTemplate() {
       sessionStorage.clear();
       location.reload();
     }
-    updateMessage(data);
+    updateMessage(setMessage, data);
   }
   return (
     <div className="d-flex flex-column">
