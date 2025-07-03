@@ -51,15 +51,18 @@ export default function EditComment({ setMessage, comm, setEditMode }) {
             multiline
             fullWidth
           />
-          <Button
-            variant="contained"
-            endIcon={<Send />}
-            type="submit"
-            className="mt-2"
-            size="small"
-          >
-            update
-          </Button>
+          <div className="d-flex align-items-center mt-2">
+            <Button
+              color="error"
+              variant="text"
+              onClick={() => setEditMode(false)}
+            >
+              cancel
+            </Button>
+            <Button variant="contained" type="submit" size="small">
+              update
+            </Button>
+          </div>
         </fieldset>
       </form>
     </div>

@@ -25,14 +25,20 @@ export default function EditTemplate() {
   }, [template]);
   async function handleClick() {
     setMessage(waitRequest);
-    const res = await fetch(`${API_URL}/templates`, {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(updatedTemplate),
-    });
+    const isAdmin = sessionStorage.getItem("isAdmin");
+    const res = await fetch(
+      `${API_URL}/${isAdmin ? "templates-manipulate" : "templates"}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(updatedTemplate),
+        credentials: isAdmin ? "include" : "omit",
+      }
+    );
     const data = await res.json();
+    updateMessage(setMessage, data);
     if (res.ok) {
       notifyUpdate();
     } else if ([403, 404].includes(res.status)) {
@@ -42,7 +48,6 @@ export default function EditTemplate() {
         location.reload();
       }, delayInms);
     }
-    updateMessage(setMessage, data);
   }
   return (
     <div className="d-flex flex-column">

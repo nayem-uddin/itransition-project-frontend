@@ -14,7 +14,7 @@ export default function Comments({ TemplateId, isDisabled, setMessage }) {
   }, [TemplateId]);
   return (
     <div className="mt-4">
-      <p className="h5 mb-0">Comments:</p>
+      <p className="h5">Comments:</p>
       <caption style={{ textWrap: "nowrap" }}>(Latest first)</caption>
       <PostComment
         TemplateId={TemplateId}
