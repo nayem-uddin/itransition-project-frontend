@@ -10,6 +10,7 @@ import {
   waitRequest,
   notifyUpdate,
   updateMessage,
+  delayInms,
 } from "../../assets/universals";
 import Responses from "./Responses";
 export default function EditTemplate() {
@@ -35,9 +36,11 @@ export default function EditTemplate() {
     if (res.ok) {
       notifyUpdate();
     } else if ([403, 404].includes(res.status)) {
-      navigate("/");
-      sessionStorage.clear();
-      location.reload();
+      setTimeout(() => {
+        navigate("/");
+        sessionStorage.clear();
+        location.reload();
+      }, delayInms);
     }
     updateMessage(setMessage, data);
   }

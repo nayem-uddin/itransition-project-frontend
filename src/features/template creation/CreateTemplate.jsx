@@ -8,6 +8,7 @@ import {
   notifyUpdate,
   waitRequest,
   updateMessage,
+  delayInms,
 } from "../../assets/universals";
 import { useNavigate } from "react-router-dom";
 import DisplayMessage from "../../components/DisplayMessage";
@@ -34,9 +35,11 @@ export default function CreateTemplate() {
     if (res.ok) {
       notifyUpdate();
     } else if ([403, 404].includes(res.status)) {
-      navigate("/");
-      sessionStorage.clear();
-      location.reload();
+      setTimeout(() => {
+        navigate("/");
+        sessionStorage.clear();
+        location.reload();
+      }, delayInms);
     }
     updateMessage(setmessage, data);
   }

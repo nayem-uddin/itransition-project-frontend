@@ -13,6 +13,7 @@ import { InputLabel, MenuItem, Select, Tooltip } from "@mui/material";
 import ShowOnPreview from "./ShowOnPreview";
 
 export default function CreateQuestion({ question, index }) {
+  const { selectedQuestions } = useSelector((state) => state.templateReducer);
   const dispatch = useDispatch();
   const types = ["string", "integer", "checkbox", "radio"];
   const qType = question.type;
@@ -39,7 +40,13 @@ export default function CreateQuestion({ question, index }) {
     <div className="d-flex align-items-center">
       <div>
         <Tooltip title="Select this question">
-          <input type="checkbox" onChange={handleSelection} />
+          <input
+            type="checkbox"
+            onChange={handleSelection}
+            defaultChecked={selectedQuestions.includes(
+              JSON.stringify(question)
+            )}
+          />
         </Tooltip>
       </div>
       <div className="mb-3 border border-dark-subtle p-3 flex-fill ms-3">

@@ -13,6 +13,7 @@ import {
   initialMessage,
   updateMessage,
   waitRequest,
+  delayInms,
 } from "../../assets/universals";
 import { useNavigate } from "react-router-dom";
 import PopupMessage from "../../components/template showcase/PopupMessage";
@@ -36,6 +37,7 @@ export default function QuestionSet() {
   async function deleteQuestions() {
     dispatch(removeQuestions());
     if (pathname === "/edit-template") {
+      setOpen(true);
       setMessage(waitRequest);
       const isAdmin = sessionStorage.getItem("isAdmin");
       const res = await fetch(
@@ -55,9 +57,11 @@ export default function QuestionSet() {
       const data = await res.json();
       updateMessage(setMessage, data);
       if ([403, 404].includes(res.status)) {
-        navigate("/", { replace: true });
-        sessionStorage.clear();
-        location.reload();
+        setTimeout(() => {
+          navigate("/", { replace: true });
+          sessionStorage.clear();
+          location.reload();
+        }, delayInms);
       }
     }
   }
@@ -72,6 +76,7 @@ export default function QuestionSet() {
         >
           delete selected questions
         </Button>
+        <PopupMessage message={message} isOpen={open} setOpen={setOpen} />
       </div>
       <form>
         <fieldset>
@@ -95,7 +100,6 @@ export default function QuestionSet() {
           />
         </fieldset>
       </form>
-      <PopupMessage message={message} isOpen={open} setOpen={setOpen} />
     </div>
   );
 }
