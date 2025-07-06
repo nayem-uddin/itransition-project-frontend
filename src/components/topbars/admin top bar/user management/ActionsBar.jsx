@@ -1,13 +1,15 @@
 import { Toolbar } from "@mui/material";
-import { delayInms } from "../../../../assets/universals";
+import { updateMessage } from "../../../../assets/universals";
 import BlockUsers from "./BlockUsers";
 import DeleteUsers from "./DeleteUsers";
 import MakeAdmins from "./MakeAdmins";
 import UnblockUsers from "./UnblockUsers";
 export default function ActionsBar({ message, setMessage }) {
   function promptForEmptyList() {
-    setMessage({ text: "Please select one or more users", type: "error" });
-    setTimeout(() => setMessage({ text: "", type: null }), delayInms);
+    updateMessage(setMessage, {
+      text: "Please select one or more users",
+      type: "error",
+    });
   }
 
   return (

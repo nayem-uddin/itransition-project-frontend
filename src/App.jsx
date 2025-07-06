@@ -26,22 +26,22 @@ function App() {
   );
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <BrowserRouter>
-        <Topbar setMode={setMode} mode={mode} />
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/user-portal" element={<UserPortal />} />
-          <Route path="/user-dashboard" element={<UserDashboard />} />
-          <Route path="/admin-portal" element={<AdminPortal />} />
-          <Route path="/admin-dashboard" element={<AdminDashboard />} />
-          <Route path="/view-template" element={<ViewFullTemplate />} />
-          <Route path="/edit-template" element={<EditTemplate />} />
-          <Route path="/form" element={<Form />} />
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
+    // <ThemeProvider theme={theme}>
+    // <CssBaseline />
+    <BrowserRouter>
+      <Topbar setMode={setMode} mode={mode} />
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/user-portal" element={<UserPortal />} />
+        <Route path="/user-dashboard" element={<UserDashboard />} />
+        <Route path="/admin-portal" element={<AdminPortal />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        <Route path="/view-template" element={<ViewFullTemplate />} />
+        <Route path="/edit-template" element={<EditTemplate />} />
+        <Route path="/form" element={<Form />} />
+      </Routes>
+    </BrowserRouter>
+    // </ThemeProvider>
   );
 }
 
