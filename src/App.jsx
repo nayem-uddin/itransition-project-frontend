@@ -9,27 +9,20 @@ import AdminPortal from "./pages/AdminPortal";
 import ViewFullTemplate from "./components/gallery/ViewFullTemplate";
 import EditTemplate from "./components/template showcase/EditTemplate";
 import Form from "./components/template showcase/Form";
-import { ThemeProvider } from "@emotion/react";
-import { createTheme, CssBaseline } from "@mui/material";
-import { useMemo, useState } from "react";
+import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 
 function App() {
-  const [mode, setMode] = useState(localStorage.getItem("theme") ?? "light");
-  const theme = useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode: mode,
-        },
-      }),
-    [mode]
-  );
+  const theme = createTheme({
+    colorSchemes: {
+      dark: true,
+    },
+  });
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
-        <Topbar setMode={setMode} mode={mode} />
+        <Topbar />
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/user-portal" element={<UserPortal />} />

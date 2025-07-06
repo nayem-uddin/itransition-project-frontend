@@ -4,7 +4,7 @@ import NavLinks from "./home top bar/NavLinks";
 import SearchBar from "./home top bar/SearchBar";
 import SwitchTheme from "./home top bar/SwitchTheme";
 
-export default function Topbar({ setMode, mode }) {
+export default function Topbar() {
   const location = useLocation();
   return (
     <>
@@ -31,7 +31,7 @@ export default function Topbar({ setMode, mode }) {
             <NavLinks />
           </div>
         </div>
-        <SwitchTheme setMode={setMode} mode={mode} />
+        <SwitchTheme />
       </nav>
     </>
   );
