@@ -14,7 +14,7 @@ import { createTheme, CssBaseline } from "@mui/material";
 import { useMemo, useState } from "react";
 
 function App() {
-  const [mode, setMode] = useState(localStorage.getItem("theme") ?? "system");
+  const [mode, setMode] = useState(localStorage.getItem("theme") ?? "light");
   const theme = useMemo(
     () =>
       createTheme({
