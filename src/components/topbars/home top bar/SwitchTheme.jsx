@@ -5,7 +5,7 @@ import Switch from "@mui/material/Switch";
 export default function SwitchTheme() {
   const { mode, setMode } = useColorScheme();
   if (!mode) {
-    setMode("system");
+    setMode("light");
   }
   function handleThemeChange(e) {
     const theme = e.target.checked ? "dark" : "light";
