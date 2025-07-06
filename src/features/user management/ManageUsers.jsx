@@ -9,6 +9,15 @@ import { deselectAllUsers, selectAllUsers } from "./controlSlice";
 import ActionsBar from "../../components/topbars/admin top bar/user management/ActionsBar";
 import { getAllAdmins } from "../admin access management/handleAdminsAPI";
 import { getUsers } from "./handleUsersAPI";
+import {
+  Checkbox,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 export default function ManageUsers() {
   const dispatch = useDispatch();
   const { allAdmins } = useSelector((state) => state.adminAccessReducer);
@@ -45,17 +54,15 @@ export default function ManageUsers() {
   }, [allUsers, allAdmins]);
   return (
     <>
-      <ActionsBar message={message} setMessage={setmessage} />
       {isLoading && <LoadingAnim />}
       {!isLoading && usersList && (
-        <>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>
-                  <input
-                    type="checkbox"
-                    name="select-all"
+        <TableContainer>
+          <ActionsBar message={message} setMessage={setmessage} />
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>
+                  <Checkbox
                     onChange={(event) =>
                       dispatch(
                         event.target.checked
@@ -65,21 +72,26 @@ export default function ManageUsers() {
                     }
                     checked={isAllSelected}
                   />
-                </th>
+                </TableCell>
                 {columns.map((column) => (
-                  <th scope="column" key={column}>
+                  <TableCell
+                    component="th"
+                    scope="column"
+                    key={column}
+                    variant="head"
+                  >
                     {column}
-                  </th>
+                  </TableCell>
                 ))}
-              </tr>
-            </thead>
-            <tbody>
+              </TableRow>
+            </TableHead>
+            <TableBody>
               {usersList.map((user) => (
                 <CandidateInfo candidate={user} key={user.id} />
               ))}
-            </tbody>
-          </table>
-        </>
+            </TableBody>
+          </Table>
+        </TableContainer>
       )}
     </>
   );

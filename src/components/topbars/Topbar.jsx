@@ -2,14 +2,20 @@ import { useLocation } from "react-router-dom";
 import Logo from "./home top bar/Logo";
 import NavLinks from "./home top bar/NavLinks";
 import SearchBar from "./home top bar/SearchBar";
+import SwitchTheme from "./home top bar/SwitchTheme";
 
-export default function Topbar() {
+export default function Topbar({ setMode, mode }) {
   const location = useLocation();
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-dark bg-gradient">
-        <div className="container-fluid">
+        <div className="container-fluid position-relative">
           <Logo />
+
+          {!["/user-portal", "/admin-portal"].includes(location.pathname) && (
+            <SearchBar />
+          )}
+
           <button
             className="navbar-toggler"
             type="button"
@@ -22,12 +28,10 @@ export default function Topbar() {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            {!["/user-portal", "/admin-portal"].includes(location.pathname) && (
-              <SearchBar />
-            )}
             <NavLinks />
           </div>
         </div>
+        <SwitchTheme setMode={setMode} mode={mode} />
       </nav>
     </>
   );

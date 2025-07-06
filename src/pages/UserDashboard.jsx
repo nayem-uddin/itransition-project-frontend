@@ -69,7 +69,7 @@ export default function UserDashboard() {
             </button>
           </li>
         </ul>
-        <div className="tab-content m-auto w-75" id="pills-tabContent">
+        <div className="tab-content m-auto" id="pills-tabContent">
           <div
             className="tab-pane fade show active"
             id="pills-info"

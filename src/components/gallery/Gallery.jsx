@@ -56,7 +56,7 @@ export default function Gallery({ templates }) {
   }
   return (
     <div className="d-flex justify-content-center m-auto">
-      <Box>
+      <Box sx={{ minWidth: "300px" }}>
         <DataGrid
           rows={templates}
           columns={columns}

@@ -73,7 +73,7 @@ export default function AdminDashboard() {
           </li>
         </ul>
 
-        <div className="tab-content m-md-auto w-50" id="v-pills-tabContent">
+        <div className="tab-content m-auto" id="v-pills-tabContent">
           <div
             className="tab-pane fade show active"
             id="v-pills-info"

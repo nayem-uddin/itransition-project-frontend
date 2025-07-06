@@ -1,3 +1,4 @@
+import { Toolbar } from "@mui/material";
 import { delayInms } from "../../../../assets/universals";
 import BlockUsers from "./BlockUsers";
 import DeleteUsers from "./DeleteUsers";
@@ -10,7 +11,7 @@ export default function ActionsBar({ message, setMessage }) {
   }
 
   return (
-    <div className="d-flex">
+    <Toolbar>
       <BlockUsers promptPop={promptForEmptyList} />
       <UnblockUsers promptPop={promptForEmptyList} />
       <DeleteUsers promptPop={promptForEmptyList} />
@@ -22,6 +23,6 @@ export default function ActionsBar({ message, setMessage }) {
       >
         {message.text}
       </div>
-    </div>
+    </Toolbar>
   );
 }

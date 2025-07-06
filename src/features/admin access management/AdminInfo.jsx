@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { deselectAdmin, selectAdmin } from "./manageSlice";
+import { Checkbox, TableCell, TableRow } from "@mui/material";
 
 export default function AdminInfo({ adminInfo }) {
   const props = ["id", "fullName", "username", "email", "status"];
@@ -10,25 +11,22 @@ export default function AdminInfo({ adminInfo }) {
   const isSelected =
     selectionList.findIndex((admin) => admin.email === adminInfo.email) !== -1;
   return (
-    <>
-      <tr>
-        <td>
-          <input
-            type="checkbox"
-            onChange={(event) =>
-              dispatch(
-                event.target.checked
-                  ? selectAdmin(adminInfo)
-                  : deselectAdmin(adminInfo)
-              )
-            }
-            checked={isSelected}
-          />
-        </td>
-        {props.map((prop) => (
-          <td key={prop}>{adminInfo[prop]}</td>
-        ))}
-      </tr>
-    </>
+    <TableRow>
+      <TableCell>
+        <Checkbox
+          onChange={(event) =>
+            dispatch(
+              event.target.checked
+                ? selectAdmin(adminInfo)
+                : deselectAdmin(adminInfo)
+            )
+          }
+          checked={isSelected}
+        />
+      </TableCell>
+      {props.map((prop) => (
+        <TableCell key={prop}>{adminInfo[prop]}</TableCell>
+      ))}
+    </TableRow>
   );
 }

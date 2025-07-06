@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import { API_URL, delayInms } from "../../assets/universals";
+import {
+  API_URL,
+  delayInms,
+  initialMessage,
+  updateMessage,
+} from "../../assets/universals";
 import { useNavigate } from "react-router-dom";
 import AdminInfo from "./AdminInfo";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +12,20 @@ import { deselectAll, selectAll } from "./manageSlice";
 import Actions from "../../components/topbars/admin top bar/admin access/Actions";
 import LoadingAnim from "../../components/LoadingAnim";
 import { getAllAdmins } from "./handleAdminsAPI";
+import {
+  Box,
+  Checkbox,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableFooter,
+  TableHead,
+  TablePagination,
+  TableRow,
+} from "@mui/material";
+
 export default function ManageAccess() {
   const dispatch = useDispatch();
   const { selectedAdmins, isLoading, allAdmins } = useSelector(
@@ -22,9 +41,8 @@ export default function ManageAccess() {
   const navigate = useNavigate();
   const isAllSelected = adminsList.length === selectedAdmins.length;
   useEffect(() => {
-    setmessage({ ...feedback });
+    updateMessage(setmessage, feedback);
     setTimeout(() => {
-      setmessage({ text: "", type: null });
       if (feedback.type === "error") {
         sessionStorage.clear();
         navigate("/");
@@ -46,37 +64,35 @@ export default function ManageAccess() {
     <div>
       {isLoading && <LoadingAnim />}
       {!isLoading && adminsList && (
-        <>
+        <TableContainer>
           <Actions message={message} setMessage={setmessage} />
-          <table className="table">
-            <thead>
-              <tr>
-                <th>
-                  <input
-                    type="checkbox"
-                    name="select-all"
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>
+                  <Checkbox
+                    checked={isAllSelected}
                     onChange={(event) =>
                       dispatch(
                         event.target.checked ? selectAll() : deselectAll()
                       )
                     }
-                    checked={isAllSelected}
                   />
-                </th>
+                </TableCell>
                 {columns.map((column) => (
-                  <th scope="column" key={column}>
+                  <TableCell key={column} scope="column" component="th">
                     {column}
-                  </th>
+                  </TableCell>
                 ))}
-              </tr>
-            </thead>
-            <tbody>
+              </TableRow>
+            </TableHead>
+            <TableBody>
               {adminsList.map((admin) => (
                 <AdminInfo adminInfo={admin} key={admin.id} />
               ))}
-            </tbody>
-          </table>
-        </>
+            </TableBody>
+          </Table>
+        </TableContainer>
       )}
     </div>
   );
