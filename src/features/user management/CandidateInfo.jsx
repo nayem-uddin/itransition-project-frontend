@@ -11,7 +11,7 @@ export default function CandidateInfo({ candidate }) {
     selectionList.findIndex((user) => user.id == candidate.id) !== -1;
   return (
     <TableRow>
-      <TableCell>
+      <TableCell padding="none">
         <Checkbox
           onChange={(event) =>
             dispatch(

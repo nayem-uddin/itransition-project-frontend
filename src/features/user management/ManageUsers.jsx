@@ -58,10 +58,10 @@ export default function ManageUsers() {
       {!isLoading && usersList && (
         <TableContainer>
           <ActionsBar message={message} setMessage={setmessage} />
-          <Table>
+          <Table size="small">
             <TableHead>
               <TableRow>
-                <TableCell>
+                <TableCell padding="none">
                   <Checkbox
                     onChange={(event) =>
                       dispatch(
@@ -78,7 +78,7 @@ export default function ManageUsers() {
                     component="th"
                     scope="column"
                     key={column}
-                    variant="head"
+                    sx={{ fontWeight: "bold" }}
                   >
                     {column}
                   </TableCell>

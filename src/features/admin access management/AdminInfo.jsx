@@ -12,7 +12,7 @@ export default function AdminInfo({ adminInfo }) {
     selectionList.findIndex((admin) => admin.email === adminInfo.email) !== -1;
   return (
     <TableRow>
-      <TableCell>
+      <TableCell padding="none">
         <Checkbox
           onChange={(event) =>
             dispatch(

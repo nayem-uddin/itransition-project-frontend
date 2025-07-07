@@ -66,10 +66,10 @@ export default function ManageAccess() {
       {!isLoading && adminsList && (
         <TableContainer>
           <Actions message={message} setMessage={setmessage} />
-          <Table>
+          <Table size="small">
             <TableHead>
               <TableRow>
-                <TableCell>
+                <TableCell padding="none">
                   <Checkbox
                     checked={isAllSelected}
                     onChange={(event) =>
@@ -80,7 +80,12 @@ export default function ManageAccess() {
                   />
                 </TableCell>
                 {columns.map((column) => (
-                  <TableCell key={column} scope="column" component="th">
+                  <TableCell
+                    key={column}
+                    scope="column"
+                    component="th"
+                    sx={{ fontWeight: "bold" }}
+                  >
                     {column}
                   </TableCell>
                 ))}

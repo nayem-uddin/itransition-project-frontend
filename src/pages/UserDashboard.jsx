@@ -1,5 +1,6 @@
 import Allforms from "../components/sent forms showcase/AllForms";
 import CreateTemplate from "../features/template creation/CreateTemplate";
+import Instructions from "../features/user dashboard/Instructions";
 import UserInfo from "../features/user dashboard/UserInfo";
 import ViewTemplates from "../features/user dashboard/ViewTemplates";
 
@@ -68,6 +69,20 @@ export default function UserDashboard() {
               Create new template
             </button>
           </li>
+          <li className="nav-item" role="presentation">
+            <button
+              className="nav-link"
+              id="pills-instructions-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-instructions"
+              type="button"
+              role="tab"
+              aria-controls="pills-instructions"
+              aria-selected="false"
+            >
+              Instructions
+            </button>
+          </li>
         </ul>
         <div className="tab-content m-auto" id="pills-tabContent">
           <div
@@ -105,6 +120,15 @@ export default function UserDashboard() {
             tabIndex="0"
           >
             <CreateTemplate />
+          </div>
+          <div
+            className="tab-pane fade"
+            id="pills-instructions"
+            role="tabpanel"
+            aria-labelledby="pills-instructions-tab"
+            tabIndex="0"
+          >
+            <Instructions />
           </div>
         </div>
       </div>
