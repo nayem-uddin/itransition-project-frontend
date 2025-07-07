@@ -5,7 +5,7 @@ export default function DisplayMessage({ message }) {
         message.type === "confirmation" ? "text-success" : "text-danger"
       }`}
     >
-      {message.text}
+      {message.text || message.message}
     </div>
   );
 }

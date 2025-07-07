@@ -13,6 +13,7 @@ import {
   delayInms,
 } from "../../assets/universals";
 import Responses from "./Responses";
+import DisplayMessage from "../DisplayMessage";
 export default function EditTemplate() {
   const location = useLocation();
   const template = location.state;
@@ -53,15 +54,7 @@ export default function EditTemplate() {
     <div className="d-flex flex-column">
       <div className="m-auto" style={{ minWidth: "300px" }}>
         <div className="d-flex justify-content-end">
-          {message.text && (
-            <div
-              className={`m-auto ${
-                message.type === "confirmation" ? "text-success" : "text-danger"
-              }`}
-            >
-              {message.text}
-            </div>
-          )}
+          <DisplayMessage message={message} />
           <input
             type="button"
             value="Save"
