@@ -13,7 +13,7 @@ export default function SwitchTheme() {
     localStorage.setItem("theme", theme);
   }
   return (
-    <>
+    <nav className="nav justify-content-end bg-primary">
       <FormControl>
         <FormControlLabel
           control={<Switch onChange={handleThemeChange} />}
@@ -22,6 +22,6 @@ export default function SwitchTheme() {
           checked={mode === "dark"}
         />
       </FormControl>
-    </>
+    </nav>
   );
 }

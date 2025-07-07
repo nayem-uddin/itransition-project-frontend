@@ -1,6 +1,8 @@
 import { useDispatch } from "react-redux";
 import { modifyOptions } from "../../../features/template creation/templateSlice";
 import Option from "./Option";
+import { Button, IconButton, Tooltip } from "@mui/material";
+import { AddCircle } from "@mui/icons-material";
 
 export default function RadioOrCheckBoxType({ question, index }) {
   const dispatch = useDispatch();
@@ -29,7 +31,11 @@ export default function RadioOrCheckBoxType({ question, index }) {
           deleteOption={deleteOption}
         />
       ))}
-      <input type="button" value="Add new option" onClick={addNewOption} />
+      <Tooltip title="Add new option">
+        <IconButton color="primary" onClick={addNewOption}>
+          <AddCircle />
+        </IconButton>
+      </Tooltip>
     </div>
   );
 }

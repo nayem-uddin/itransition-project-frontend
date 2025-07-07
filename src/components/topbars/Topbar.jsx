@@ -8,6 +8,7 @@ export default function Topbar() {
   const location = useLocation();
   return (
     <>
+      <SwitchTheme />
       <nav className="navbar navbar-expand-lg bg-dark bg-gradient">
         <div className="container-fluid position-relative">
           <Logo />
@@ -31,7 +32,6 @@ export default function Topbar() {
             <NavLinks />
           </div>
         </div>
-        <SwitchTheme />
       </nav>
     </>
   );

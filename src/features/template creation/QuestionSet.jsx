@@ -7,7 +7,7 @@ import {
 } from "./templateSlice";
 import { useState } from "react";
 import { Button } from "@mui/material";
-import { Delete } from "@mui/icons-material";
+import { Add, Delete } from "@mui/icons-material";
 import {
   API_URL,
   initialMessage,
@@ -91,13 +91,15 @@ export default function QuestionSet() {
               <CreateQuestion question={q} index={index} />
             </div>
           ))}
-
-          <input
-            type="button"
-            value="Add new question"
+          <Button
+            variant="outlined"
             onClick={handleClick}
             disabled={questions.length === 16}
-          />
+            color="success"
+            startIcon={<Add />}
+          >
+            Add new question
+          </Button>
         </fieldset>
       </form>
     </div>
