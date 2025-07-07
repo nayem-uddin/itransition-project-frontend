@@ -38,12 +38,7 @@ export default function Instructions() {
             button above the tabs clicking which the template can be created or
             updated (based on the mode).
           </li>
-          <li>
-            In both create and edit mode, multiple questinns can be selected
-            checking the checkboxes beside them, and can be deleted at once
-            clicking the delete button above them. However, once a question is
-            deleted, it can not be recovered.
-          </li>
+
           <li>
             Some tags are already available, but custom tags can be added as
             well. To add custom tags, write a tag, and then press Enter to add
@@ -95,6 +90,12 @@ export default function Instructions() {
           <li>
             For radio and checkbox type questions, click the three dots at the
             right of each added option to edit/delete that option
+          </li>
+          <li>
+            In both template create and edit mode, multiple questions can be
+            selected checking the checkboxes beside them, and can be deleted at
+            once clicking the delete button above them. However, once a question
+            is deleted, it can not be recovered.
           </li>
         </ul>
       </Box>
