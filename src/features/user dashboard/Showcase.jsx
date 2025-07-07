@@ -85,41 +85,40 @@ export default function Showcase({ templates }) {
   }
   return (
     <div>
-      <div className="d-flex justify-content-center m-auto">
-        <Box sx={{ minWidth: "300px" }}>
-          <DataGrid
-            onRowSelectionModelChange={getSelectedRowIds}
-            checkboxSelection
-            rows={templates}
-            columns={columns}
-            onRowClick={handleClick}
-            sx={{
-              "& .MuiDataGrid-columnHeaders": {
-                fontWeight: "bold",
-                fontSize: "1rem",
-              },
-              "&.MuiDataGrid-root--densityCompact .MuiDataGrid-cell": {
-                py: "8px",
-              },
-              "&.MuiDataGrid-root--densityStandard .MuiDataGrid-cell": {
-                py: "15px",
-              },
-              "&.MuiDataGrid-root--densityComfortable .MuiDataGrid-cell": {
-                py: "22px",
-              },
-              "& .MuiDataGrid-row": {
-                cursor: "pointer",
-              },
-            }}
-            showToolbar
-            slotProps={{
-              toolbar: { showQuickFilter: false },
-            }}
-            slots={{ noRowsOverlay: gridOverlay, toolbar: CustomToolbar }}
-            getRowHeight={() => "auto"}
-          />
-        </Box>
-      </div>
+      <Box>
+        <DataGrid
+          onRowSelectionModelChange={getSelectedRowIds}
+          checkboxSelection
+          rows={templates}
+          columns={columns}
+          onRowClick={handleClick}
+          sx={{
+            "& .MuiDataGrid-columnHeaders": {
+              fontWeight: "bold",
+              fontSize: "1rem",
+            },
+            "&.MuiDataGrid-root--densityCompact .MuiDataGrid-cell": {
+              py: "8px",
+            },
+            "&.MuiDataGrid-root--densityStandard .MuiDataGrid-cell": {
+              py: "15px",
+            },
+            "&.MuiDataGrid-root--densityComfortable .MuiDataGrid-cell": {
+              py: "22px",
+            },
+            "& .MuiDataGrid-row": {
+              cursor: "pointer",
+            },
+          }}
+          showToolbar
+          slotProps={{
+            toolbar: { showQuickFilter: false },
+          }}
+          slots={{ noRowsOverlay: gridOverlay, toolbar: CustomToolbar }}
+          getRowHeight={() => "auto"}
+        />
+      </Box>
+
       <PopupMessage message={message} isOpen={open} setOpen={setOpen} />
     </div>
   );
