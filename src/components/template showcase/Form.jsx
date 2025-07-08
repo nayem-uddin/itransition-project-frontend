@@ -7,6 +7,8 @@ import {
   API_URL,
   updateMessage,
   requestForms,
+  waitRequest,
+  delayInms,
 } from "../../assets/universals";
 import DisplayMessage from "../DisplayMessage";
 import { useEffect, useState } from "react";
@@ -27,6 +29,7 @@ export default function Form() {
     reset(defaultValues);
   }, [answers]);
   async function onSubmit(data) {
+    updateMessage(setMessage, waitRequest);
     const updatedForm = formatForm(form, data);
     const endpoint = sessionStorage.getItem("isAdmin")
       ? "form-manipulate"
@@ -48,6 +51,12 @@ export default function Form() {
           ? "/admin-dashboard"
           : "/user-dashboard"
       );
+    } else if ([403, 404].includes(res.status)) {
+      setTimeout(() => {
+        navigate("/", { replace: true });
+        sessionStorage.clear();
+        window.location.reload();
+      }, delayInms);
     }
   }
   return (
