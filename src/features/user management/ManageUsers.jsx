@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { API_URL, delayInms } from "../../assets/universals";
 import { useNavigate } from "react-router-dom";
 import CandidateInfo from "./CandidateInfo";
@@ -20,12 +20,11 @@ import {
 } from "@mui/material";
 export default function ManageUsers() {
   const dispatch = useDispatch();
-  const { allAdmins } = useSelector((state) => state.adminAccessReducer);
   const { selectedUsers, isLoading, isAdminsListUpdated, allUsers } =
     useSelector((state) => state.userManagementReducer);
   const feedback = useSelector((state) => state.userManagementReducer.message);
   const columns = ["ID", "Full name", "Username", "Email", "Status"];
-  const [usersList, setUsersList] = useState([]);
+  const usersList = useMemo(() => allUsers || [], [allUsers]);
   const [message, setmessage] = useState({ ...feedback });
   const navigate = useNavigate();
   const isAllSelected = usersList.length === selectedUsers.length;
@@ -33,7 +32,10 @@ export default function ManageUsers() {
     setmessage({ ...feedback });
     setTimeout(() => {
       setmessage({ text: "", type: null });
-      if (feedback.type === "error") {
+      if (
+        feedback.text.includes("blocked") ||
+        feedback.text.includes("deleted")
+      ) {
         sessionStorage.clear();
         navigate("/");
         location.reload();
@@ -45,13 +47,7 @@ export default function ManageUsers() {
     dispatch(getAllAdmins());
     dispatch(getUsers());
   }, [dispatch, isAdminsListUpdated]);
-  useEffect(() => {
-    function users() {
-      if (!allAdmins.length || !allUsers.length) return;
-      setUsersList([...allUsers]);
-    }
-    users();
-  }, [allUsers, allAdmins]);
+
   return (
     <>
       {isLoading && <LoadingAnim />}

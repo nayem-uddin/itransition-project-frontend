@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   API_URL,
   delayInms,
@@ -36,14 +36,17 @@ export default function ManageAccess() {
   );
   const feedback = useSelector((state) => state.adminAccessReducer.message);
   const columns = ["ID", "Full name", "Username", "Email", "Status"];
-  const [adminsList, setAdminsList] = useState([]);
+  const adminsList = useMemo(() => allAdmins || [], [allAdmins]);
   const [message, setmessage] = useState({ ...feedback });
   const navigate = useNavigate();
   const isAllSelected = adminsList.length === selectedAdmins.length;
   useEffect(() => {
     updateMessage(setmessage, feedback);
     setTimeout(() => {
-      if (feedback.type === "error") {
+      if (
+        feedback.text.includes("blocked") ||
+        feedback.text.includes("deleted")
+      ) {
         sessionStorage.clear();
         navigate("/");
         location.reload();
@@ -53,13 +56,7 @@ export default function ManageAccess() {
   useEffect(() => {
     dispatch(getAllAdmins());
   }, [dispatch, isAdminsListUpdated]);
-  useEffect(() => {
-    function admins() {
-      if (allAdmins.length === 0) return;
-      setAdminsList([...allAdmins]);
-    }
-    admins();
-  }, [allAdmins]);
+
   return (
     <div>
       {isLoading && <LoadingAnim />}
