@@ -35,7 +35,6 @@ export default function QuestionSet() {
     dispatch(reorderQuestions({ oldPosition, newPosition }));
   }
   async function deleteQuestions() {
-    dispatch(removeQuestions());
     if (pathname === "/edit-template") {
       setOpen(true);
       setMessage(waitRequest);
@@ -62,8 +61,10 @@ export default function QuestionSet() {
           sessionStorage.clear();
           location.reload();
         }, delayInms);
+        return;
       }
     }
+    dispatch(removeQuestions());
   }
   return (
     <div>
