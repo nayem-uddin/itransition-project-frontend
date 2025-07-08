@@ -4,10 +4,12 @@ import Markdown from "react-markdown";
 import { useForm } from "react-hook-form";
 import {
   API_URL,
+  delayInms,
   initialMessage,
   requestForms,
   toForm,
   updateMessage,
+  waitRequest,
 } from "../../assets/universals";
 import DisplayMessage from "../DisplayMessage";
 import { useState } from "react";
@@ -27,6 +29,7 @@ export default function ViewFullTemplate() {
       template?.usersWithAccess?.includes(Number(userId)));
   async function onSubmit(data) {
     const form = toForm(data, template.id, Questions);
+    updateMessage(setMessage, waitRequest);
     const res = await fetch(`${API_URL}/form`, {
       method: "POST",
       headers: {
@@ -43,6 +46,12 @@ export default function ViewFullTemplate() {
           ? "/admin-dashboard"
           : "/user-dashboard"
       );
+    } else if ([403, 404].includes(res.status)) {
+      setTimeout(() => {
+        sessionStorage.clear();
+        navigate("/", { replace: true });
+        window.location.reload();
+      }, delayInms);
     }
   }
   return (

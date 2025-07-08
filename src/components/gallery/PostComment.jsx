@@ -3,12 +3,15 @@ import { Button, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import {
   API_URL,
+  delayInms,
   initialMessage,
   socket,
   updateMessage,
   waitRequest,
 } from "../../assets/universals";
+import { useNavigate } from "react-router-dom";
 export default function PostComment({ TemplateId, isDisabled, setMessage }) {
+  const navigate = useNavigate();
   const { register, handleSubmit, reset } = useForm();
   async function onSubmit(data, event) {
     event.preventDefault();
@@ -26,12 +29,17 @@ export default function PostComment({ TemplateId, isDisabled, setMessage }) {
       body: JSON.stringify(comment),
     });
     const message = await res.json();
+    updateMessage(setMessage, message);
     if (res.ok) {
       socket.emit("update-comments", TemplateId);
       reset();
       setMessage(initialMessage);
-    } else {
-      updateMessage(setMessage, message);
+    } else if ([403, 404].includes(res.status)) {
+      setTimeout(() => {
+        navigate("/", { replace: true });
+        sessionStorage.clear();
+        location.reload();
+      }, delayInms);
     }
   }
   return (
