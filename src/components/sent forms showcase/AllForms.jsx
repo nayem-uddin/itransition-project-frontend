@@ -8,6 +8,12 @@ import { socket } from "../../assets/universals";
 export default function Allforms() {
   const navigate = useNavigate();
   const [forms, setForms] = useState([]);
+  useEffect(() => {
+    socket.emit("request-sent-forms", sessionStorage.getItem("id"));
+    socket.on("deliver-sent-forms", (data) => {
+      setForms(data.forms);
+    });
+  }, []);
   function handleClick(params, event, details) {
     const idx = forms.findIndex((template) => template.id === params.id);
     navigate("/form", {
@@ -56,12 +62,7 @@ export default function Allforms() {
       </StyledGrid>
     );
   }
-  useEffect(() => {
-    socket.emit("request-sent-forms", sessionStorage.getItem("id"));
-    socket.on("deliver-sent-forms", (data) => {
-      setForms(data.forms);
-    });
-  }, []);
+
   return (
     <div>
       <div className="d-flex justify-content-center m-auto">

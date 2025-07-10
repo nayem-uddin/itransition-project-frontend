@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 export default function Form() {
   const location = useLocation();
   const form = location.state;
-  const answers = form.response;
+  const { answers } = form;
   const navigate = useNavigate();
   const defaultValues = Object.fromEntries(
     answers.map((answer, index) => [index, answer.answer])
@@ -27,7 +27,7 @@ export default function Form() {
   });
   useEffect(() => {
     reset(defaultValues);
-  }, [answers]);
+  }, []);
   async function onSubmit(data) {
     updateMessage(setMessage, waitRequest);
     const updatedForm = formatForm(form, data);

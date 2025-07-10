@@ -26,38 +26,34 @@ export const updateMessage = (setMessage, newMessage) => {
 };
 
 export const toForm = (data, TemplateId, Questions) => {
+  const UserId = sessionStorage.getItem("id");
   const form = {
+    UserId,
     TemplateId,
-    UserId: sessionStorage.getItem("id"),
   };
   const qaPairs = [];
   for (const [qIdx, answer] of Object.entries(data)) {
     const currQues = Questions[Number(qIdx)];
     const response = {
-      qTitle: currQues.title,
-      qDescription: currQues.description,
-      qType: currQues.type,
-      qShowOnPreview: currQues.showOnPreview || false,
+      QuestionId: currQues.id,
       answer,
+      UserId,
     };
-    const currQuesType = currQues.type;
-    if (currQuesType === "integer") {
-      Object.assign(response, { qMax: currQues.max, qMin: currQues.min });
-    } else if (currQuesType !== "string") {
-      Object.assign(response, { qOptions: currQues.options });
-    }
     qaPairs.push(response);
   }
-  Object.assign(form, { response: qaPairs });
+  Object.assign(form, { answers: qaPairs });
   return form;
 };
 
 export const formatForm = (form, data) => {
-  let response = form.response;
+  delete data["defaultValues"];
+  let { answers } = form;
   for (const [idx, answer] of Object.entries(data)) {
-    response[idx] = { ...response[idx], answer };
+    const ans = answers[Number(idx)];
+    delete ans["updatedAt"];
+    Object.assign(ans, { answer });
   }
-  const newForm = { id: form.id, UserId: form.UserId, response };
+  const newForm = { id: form.id, UserId: form.UserId, answers };
   return newForm;
 };
 

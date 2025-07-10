@@ -29,6 +29,7 @@ export default function ViewFullTemplate() {
       template?.usersWithAccess?.includes(Number(userId)));
   async function onSubmit(data) {
     const form = toForm(data, template.id, Questions);
+    // console.log(form);
     updateMessage(setMessage, waitRequest);
     const res = await fetch(`${API_URL}/form`, {
       method: "POST",
@@ -41,11 +42,6 @@ export default function ViewFullTemplate() {
     updateMessage(setMessage, received);
     if (res.ok) {
       requestForms(template.id, template.UserId);
-      navigate(
-        sessionStorage.getItem("isAdmin")
-          ? "/admin-dashboard"
-          : "/user-dashboard"
-      );
     } else if ([403, 404].includes(res.status)) {
       setTimeout(() => {
         sessionStorage.clear();
