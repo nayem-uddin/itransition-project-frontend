@@ -10,6 +10,8 @@ import ViewFullTemplate from "./components/gallery/ViewFullTemplate";
 import EditTemplate from "./components/template showcase/EditTemplate";
 import Form from "./components/template showcase/Form";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import Footer from "./components/Footer";
+import SubscriberForm from "./pages/SubscriberForm";
 
 function App() {
   const theme = createTheme({
@@ -32,7 +34,9 @@ function App() {
           <Route path="/view-template" element={<ViewFullTemplate />} />
           <Route path="/edit-template" element={<EditTemplate />} />
           <Route path="/form" element={<Form />} />
+          <Route path="/subscriber-register" element={<SubscriberForm />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </ThemeProvider>
   );

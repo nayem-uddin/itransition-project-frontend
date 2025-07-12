@@ -23,7 +23,7 @@ export default function PopupMessage({ message, isOpen, setOpen }) {
         onClose={() => setOpen(false)}
         action={Action}
         message={message.text ?? message.message}
-      ></Snackbar>
+      />
     </div>
   );
 }
