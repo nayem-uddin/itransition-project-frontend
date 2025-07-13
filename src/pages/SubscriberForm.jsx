@@ -1,12 +1,7 @@
 import { Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 import InputField from "../components/subscriber_form/InputField";
-import {
-  API_URL,
-  initialMessage,
-  updateMessage,
-  waitRequest,
-} from "../assets/universals";
+import { API_URL, initialMessage, waitRequest } from "../assets/universals";
 import PopupMessage from "../components/template showcase/PopupMessage";
 import { useState } from "react";
 
@@ -34,7 +29,7 @@ export default function SubscriberForm() {
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <fieldset
-          className="d-flex flex-column mt-5 m-auto"
+          className="mt-5 m-auto d-flex flex-column"
           style={{ width: "300px" }}
         >
           <InputField register={register} label="Full name" field="Name" />

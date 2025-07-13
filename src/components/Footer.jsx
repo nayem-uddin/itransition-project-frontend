@@ -1,13 +1,15 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Footer() {
+  const navigate = useNavigate();
+  function redirect() {
+    navigate("/report", { state: location.pathname });
+  }
   return (
     <footer className="fixed-bottom ms-5">
-      <p>
-        Want to get notified about our latest services?{" "}
-        <Link to="/subscriber-register">Subscribe</Link>
-      </p>
-      <p>Need help?</p>
+      <button type="button" className="btn btn-link" onClick={redirect}>
+        Report an issue
+      </button>
     </footer>
   );
 }

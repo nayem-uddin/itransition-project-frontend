@@ -12,7 +12,7 @@ import Form from "./components/template showcase/Form";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import Footer from "./components/Footer";
 import SubscriberForm from "./pages/SubscriberForm";
-
+import HelpForm from "./pages/HelpForm";
 function App() {
   const theme = createTheme({
     colorSchemes: {
@@ -35,6 +35,7 @@ function App() {
           <Route path="/edit-template" element={<EditTemplate />} />
           <Route path="/form" element={<Form />} />
           <Route path="/subscriber-register" element={<SubscriberForm />} />
+          <Route path="/report" element={<HelpForm />} />
         </Routes>
         <Footer />
       </BrowserRouter>
