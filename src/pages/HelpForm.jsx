@@ -26,7 +26,6 @@ export default function HelpForm() {
   async function onSubmit(data) {
     popup(waitRequest);
     Object.assign(data, { link });
-    // console.log(data);
     const res = await fetch(`${API_URL}/report`, {
       method: "POST",
       headers: {

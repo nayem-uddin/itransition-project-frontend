@@ -5,7 +5,7 @@ export default function InputField({ register, label, field, placeholder }) {
       variant="outlined"
       label={label}
       {...register(field)}
-      className="mb-3"
+      className="mb-3 mt-3"
       required
       placeholder={placeholder}
     />

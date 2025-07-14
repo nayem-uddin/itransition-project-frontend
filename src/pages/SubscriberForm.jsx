@@ -4,9 +4,10 @@ import InputField from "../components/subscriber_form/InputField";
 import { API_URL, initialMessage, waitRequest } from "../assets/universals";
 import PopupMessage from "../components/template showcase/PopupMessage";
 import { useState } from "react";
+import Country from "../components/subscriber_form/Country";
 
 export default function SubscriberForm() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, control } = useForm();
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState(initialMessage);
   function popup(msg) {
@@ -14,6 +15,7 @@ export default function SubscriberForm() {
     setMessage(msg);
   }
   async function onSubmit(data) {
+    // console.log(data);
     popup(waitRequest);
     const res = await fetch(`${API_URL}/oauth2/auth`, {
       method: "POST",
@@ -33,12 +35,8 @@ export default function SubscriberForm() {
           style={{ width: "300px" }}
         >
           <InputField register={register} label="Full name" field="Name" />
-          <InputField
-            register={register}
-            label="Country"
-            placeholder="Full name of your country"
-            field="BillingCountry"
-          />
+
+          <Country control={control} />
           <InputField
             register={register}
             label="City"
