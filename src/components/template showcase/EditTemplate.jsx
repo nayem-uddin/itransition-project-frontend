@@ -14,6 +14,7 @@ import {
 } from "../../assets/universals";
 import Responses from "./Responses";
 import DisplayMessage from "../DisplayMessage";
+import Aggregate from "./Aggregate";
 export default function EditTemplate() {
   const location = useLocation();
   const template = location.state;
@@ -100,6 +101,18 @@ export default function EditTemplate() {
           >
             Results
           </button>
+          <button
+            className="nav-link"
+            id="aggregate-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#aggregate-tab-pane"
+            type="button"
+            role="tab"
+            aria-controls="aggregate-tab-pane"
+            aria-selected="false"
+          >
+            Aggregate
+          </button>
         </nav>
         <div className="tab-content" id="myTabContent">
           <div
@@ -128,6 +141,15 @@ export default function EditTemplate() {
             tabIndex="0"
           >
             <Responses template={template} />
+          </div>
+          <div
+            className="tab-pane fade"
+            id="aggregate-tab-pane"
+            role="tabpanel"
+            aria-labelledby="aggregate-tab"
+            tabIndex="0"
+          >
+            <Aggregate templateId={template.id} />
           </div>
         </div>
       </div>
