@@ -25,7 +25,7 @@ export default function QuestionInfo({ question }) {
           {type === "integer" && (
             <>
               <p className="h5 text-capitalize">average</p>
-              <p>{question["average"]}</p>
+              <p>{question["average"] || 0}</p>
             </>
           )}
           {["radio", "checkbox"].includes(type) && (
