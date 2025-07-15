@@ -4,6 +4,7 @@ import {
   AccordionDetails,
   AccordionSummary,
   Box,
+  Typography,
 } from "@mui/material";
 export default function QuestionInfo({ question }) {
   const { title, type, mostChosenThree } = question;
@@ -31,7 +32,7 @@ export default function QuestionInfo({ question }) {
             <>
               <p className="h5 text-capitalize">top 3 most chosen answers</p>
               {mostChosenThree.map((ans) => (
-                <span key={ans}>{ans}</span>
+                <Typography component="p">{ans}</Typography>
               ))}
             </>
           )}
