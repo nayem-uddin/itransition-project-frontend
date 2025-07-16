@@ -13,6 +13,7 @@ import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import Footer from "./components/Footer";
 import SubscriberForm from "./pages/SubscriberForm";
 import HelpForm from "./pages/HelpForm";
+import TokenGenerator from "./pages/TokenGenerator";
 function App() {
   const theme = createTheme({
     colorSchemes: {
@@ -36,6 +37,7 @@ function App() {
           <Route path="/form" element={<Form />} />
           <Route path="/subscriber-register" element={<SubscriberForm />} />
           <Route path="/report" element={<HelpForm />} />
+          <Route path="/token-gen" element={<TokenGenerator />} />
         </Routes>
         <Footer />
       </BrowserRouter>

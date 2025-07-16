@@ -1,6 +1,7 @@
 import Allforms from "../components/sent forms showcase/AllForms";
 import CreateTemplate from "../features/template creation/CreateTemplate";
 import Instructions from "../features/user dashboard/Instructions";
+import RequestToken from "../features/user dashboard/RequestToken";
 import UserInfo from "../features/user dashboard/UserInfo";
 import ViewTemplates from "../features/user dashboard/ViewTemplates";
 
@@ -83,6 +84,20 @@ export default function UserDashboard() {
               Instructions
             </button>
           </li>
+          <li className="nav-item" role="presentation">
+            <button
+              className="nav-link"
+              id="pills-Extras-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-Extras"
+              type="button"
+              role="tab"
+              aria-controls="pills-Extras"
+              aria-selected="false"
+            >
+              Extras
+            </button>
+          </li>
         </ul>
         <div className="tab-content m-auto" id="pills-tabContent">
           <div
@@ -129,6 +144,15 @@ export default function UserDashboard() {
             tabIndex="0"
           >
             <Instructions />
+          </div>
+          <div
+            className="tab-pane fade"
+            id="pills-Extras"
+            role="tabpanel"
+            aria-labelledby="pills-Extras-tab"
+            tabIndex="0"
+          >
+            <RequestToken />
           </div>
         </div>
       </div>

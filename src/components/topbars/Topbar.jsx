@@ -13,9 +13,9 @@ export default function Topbar() {
         <div className="container-fluid position-relative">
           <Logo />
 
-          {!["/user-portal", "/admin-portal"].includes(location.pathname) && (
-            <SearchBar />
-          )}
+          {["/user-dashboard", "/admin-dashboard", "/"].includes(
+            location.pathname
+          ) && <SearchBar />}
 
           <button
             className="navbar-toggler"
